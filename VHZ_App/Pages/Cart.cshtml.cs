@@ -40,32 +40,27 @@ namespace VHZ_App.Pages
             HttpContext.Session.SetInt32("ProductId", idProduct);
             return RedirectToPage("/CardProduct");
         }
-        public IActionResult OnPostBuySelectedCarts([FromForm] List<int> selectedCarts)  // Изменили имя параметра
+        public IActionResult OnPostBuySelectedCarts([FromForm] List<int> selectedCarts)
         {
             if (selectedCarts == null || selectedCarts.Count == 0)
             {
-                ErrorMessage = "Выберите товар!";
+                ErrorMessage = "Выберите хотя бы один товар!";
                 return RedirectToPage();
             }
 
-            // Сохраняем IdCart вместо IdProduct
+            // Сохраняем выбранные корзины в сессии
             HttpContext.Session.SetString("SelectedCarts", JsonConvert.SerializeObject(selectedCarts));
             return RedirectToPage("/MakingOrder");
         }
+
         public async Task<IActionResult> OnPostBuyProductAsync(int idCart)
         {
-            var cartItem = await _context.Carts
-                .Include(c => c.IdProductNavigation)
-                .FirstOrDefaultAsync(c => c.IdCart == idCart);
-
-            if (cartItem == null) return NotFound();
-
-            // Для одиночной покупки также сохраняем IdCart
+            // Для покупки одного товара
             var selectedCarts = new List<int> { idCart };
             HttpContext.Session.SetString("SelectedCarts", JsonConvert.SerializeObject(selectedCarts));
-
             return RedirectToPage("/MakingOrder");
         }
+
 
         public async Task<IActionResult> OnPostDeleteCartAsync(int idCart)
         {

@@ -574,7 +574,7 @@ header {
     font-weight: bold;
 }
 
-#btn-cart-oform {
+.btn-cart-oform {
     border-radius: 15px;
     color: white;
     height: 40px;
@@ -582,7 +582,7 @@ header {
     background-color: #3401bb;
 }
 
-    #btn-cart-oform:hover, .btn-cart:hover, .btn-minus:hover, .btn-plus:hover, .add-bascket-btn:hover, .buy-bascket-btn:hover {
+    .btn-cart-oform:hover, .btn-cart:hover, .btn-minus:hover, .btn-plus:hover, .add-bascket-btn:hover, .buy-bascket-btn:hover {
         background-color: #DCD1FF;
         color: black;
     }
@@ -739,3 +739,9 @@ header {
     margin-left:45%;
 }
 /**/
+.radio-bankCard {
+    transform: scale(3);
+    accent-color: #3401bb;
+    float:right;
+    margin:15px;
+}

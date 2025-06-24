@@ -5,6 +5,9 @@
 @{
     ViewData["Title"] = "Оформление заказа";
 }
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
 <p class="otstup" />
 <label class="cart-lbl">Оформление заказа</label>
 <p class="otstup" />
@@ -74,29 +77,18 @@
         <div class="bank-cards-list">
             @foreach (var card in Model.BankCards)
             {
-                <div class="bank-card-item @(card.IsDefault ? "default-card" : "")">
+                <div class="bank-card-item default-card">
                     <div class="card-info">
+                        <input name="bankCard" type="radio" value="@card.IdBankCard" class="radio-bankCard" />
+
                         <div class="d-flex justify-content-between">
                             <h6>@card.BankName</h6>
-                            @if (card.IsDefault)
-                            {
-                                <span class="badge bg-primary">Основная</span>
-                            }
                         </div>
+
                         <div class="info-row">
                             <div class="info-block"><label>Номер карты</label><div>**** **** **** @card.CardNumber[^4..]</div></div>
                             <div class="info-block"><label>Срок действия</label><div>@card.ValidityPeriod</div></div>
                         </div>
-                    </div>
-                    <div class="card-actions">
-                        <form method="post" asp-page-handler="SetDefaultCard" asp-route-idBankCard="@card.IdBankCard" class="d-inline">
-                            <button type="submit" class="btn btn-sm @(card.IsDefault ? "btn-primary" : "btn-outline-primary")" @(card.IsDefault ? "disabled" : "")>
-                                Сделать основной
-                            </button>
-                        </form>
-                        <form method="post" asp-page-handler="DeleteCard" asp-route-idBankCard="@card.IdBankCard" onsubmit="return confirm('Вы уверены, что хотите удалить эту банковскую карту?');" class="d-inline">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
-                        </form>
                     </div>
                 </div>
             }
@@ -105,11 +97,15 @@
     else
     {
         <p class="text-muted">У вас пока нет добавленных банковских карт.</p>
+        <button onclick="location.href='/AddBankCard'" class="btn-cart-oform">Добавить карту</button>
     }
 </div>
+
 <p class="otstup"></p>
 <p></p>
-<button id="btn-cart-oform" onclick="openModal()">Заказать</button>
+<button class="btn-cart-oform" onclick="openModal()">Заказать</button>
+<label class="end-text"></label>
+<p class="otstup"></p>
 <div id="myModal" class="modal">
     <div class="modal-content">
         <h2>Подтверждение заказа</h2>
@@ -121,4 +117,3 @@
         
     </div>
 </div>
-<label class="end-text"></label>

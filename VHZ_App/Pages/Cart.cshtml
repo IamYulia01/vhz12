@@ -33,7 +33,8 @@
         <input type="checkbox"
                    class="check-cart"
                    name="selectedProducts"
-                   value="@cart.IdCart" />
+                   value="@cart.IdCart"
+                   onclick="event.stopPropagation()" />
             <input type="hidden" name="idProduct" value="@cart.IdProduct" />
             <div onclick="this.closest('form').submit()">
                 <div class="div-img">
@@ -76,8 +77,23 @@
 <label class="txt-cart-16">ИТОГО:</label>
 <label class="cart-amount txt-cart-16">@Model.price.ToString("#.##")</label>
 <label class="cart-amount-sht txt-cart-16">руб</label>
-<button type="submit" id="btn-cart-oform">К оформлению</button>
+<button type="submit" class="btn-cart-oform">К оформлению</button>
 
 </form>
 <label class="end-text"></label>
 <p></p>
+
+    <script>
+    // Переключение чекбокса при клике на товар
+    function toggleCheckbox(element) {
+        const checkbox = element.closest('.card-catalog').querySelector('.check-cart');
+        checkbox.checked = !checkbox.checked;
+    }
+
+    // Обработка форм действий, чтобы они не мешали основной форме
+    document.querySelectorAll('.actions form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.stopPropagation();
+        });
+    });
+</script>
