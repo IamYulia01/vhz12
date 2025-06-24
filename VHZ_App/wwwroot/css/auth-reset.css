@@ -1,0 +1,203 @@
+﻿.register-wrapper {
+    display: flex;
+    height: 100vh;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #333;
+}
+
+/* Левая панель */
+.left-panel {
+    background-color: #f2f3f8;
+    width: 35%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: inset -5px 0 15px rgb(61 32 199 / 0.05);
+}
+
+    .left-panel .logo {
+        width: 280px;
+        margin-bottom: 28px;
+        filter: drop-shadow(0 0 2px rgb(61 32 199 / 0.15));
+    }
+
+    .left-panel h1 {
+        font-weight: 800;
+        font-size: 2.3rem;
+        line-height: 1.25;
+        margin-bottom: 1.2rem;
+        color: #3D20C7;
+        text-shadow: 0 0 3px rgb(61 32 199 / 0.15);
+    }
+
+    .left-panel p {
+        font-size: 1.05rem;
+        color: #555;
+        max-width: 280px;
+        margin: 0 auto;
+        line-height: 1.5;
+    }
+
+/* Правая панель — растягивается на всю оставшуюся ширину */
+.right-panel {
+    flex-grow: 1; /* растягивается по максимуму */
+    padding: 2rem 3rem;
+    background-color: #fff;
+    box-shadow: inset 5px 0 15px rgb(61 32 199 / 0.05);
+    border-radius: 0 12px 12px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* НЕ align-items: center; чтобы не центрировать содержимое */
+    max-width: none; /* убираем ограничение ширины */
+    box-sizing: border-box;
+}
+
+/* Заголовок */
+.h2-2 {
+    font-weight: 800;
+    font-size: 2rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #3D20C7;
+    letter-spacing: 0.02em;
+}
+
+/* Абзацы */
+.right-panel p {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.4;
+    /* Можно текст по левому краю */
+    text-align: left;
+}
+
+/* Инпуты — шириной 100% от правой панели */
+form input.form-control {
+    width: 100%;
+    box-sizing: border-box;
+    min-width: 0;
+    border-radius: 8px;
+    height: 48px;
+    border: 1.8px solid #bbb;
+    padding: 0 14px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.06);
+    margin-bottom: 1rem;
+    max-width: none; /* снимаем ограничение */
+}
+
+    /* Фокус */
+    form input.form-control:focus {
+        border-color: #3D20C7;
+        box-shadow: 0 0 8px rgb(61 32 199 / 0.25);
+        outline: none;
+    }
+
+/* Кнопка — растягивается по ширине формы */
+.btn-submit {
+    background-color: #3D20C7;
+    color: white;
+    border: none;
+    padding: 14px 26px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 1.5rem;
+    box-shadow: 0 6px 12px rgb(61 32 199 / 0.3);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%; /* растянуть на всю ширину */
+    max-width: none;
+}
+
+    .btn-submit:hover,
+    .btn-submit:focus {
+        background-color: #2e1a99;
+        box-shadow: 0 8px 18px rgb(46 26 153 / 0.6);
+        outline: none;
+    }
+
+/* Ссылки */
+.right-panel a.btn-link {
+    margin-top: 1.5rem;
+    font-size: 0.95rem;
+    color: #3D20C7;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+    .right-panel a.btn-link:hover,
+    .right-panel a.btn-link:focus {
+        color: #2e1a99;
+        text-decoration: underline;
+        outline: none;
+    }
+
+/* Сообщения */
+.alert {
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-top: 1.8rem;
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow: 0 1px 8px rgb(0 0 0 / 0.07);
+    width: 100%;
+    max-width: none;
+}
+
+.alert-info {
+    background-color: #e7f3fe;
+    color: #3178c6;
+    border: 1.5px solid #b3d4fc;
+}
+
+.alert-danger {
+    background-color: #fdecea;
+    color: #b02a37;
+    border: 1.5px solid #f5c6cb;
+}
+
+.alert-warning {
+    background-color: #fff4e5;
+    color: #8a6d3b;
+    border: 1.5px solid #ffeeba;
+}
+
+/* Адаптив */
+@media (max-width: 768px) {
+    .register-wrapper {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+        padding: 2.5rem 1.8rem;
+        border-radius: 0;
+        box-shadow: none !important;
+    }
+
+    .left-panel {
+        order: 2;
+        text-align: center;
+    }
+
+    .right-panel {
+        order: 1;
+        /* Инпуты и кнопки растягиваются */
+    }
+
+    form input.form-control,
+    .btn-submit,
+    .alert {
+        max-width: 100%;
+    }
+}

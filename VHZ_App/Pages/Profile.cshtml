@@ -1,0 +1,137 @@
+﻿@page
+@model VHZ_App.Pages.ProfileModel
+@{
+    ViewData["Title"] = "Личный кабинет";
+    Layout = "_Layout";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
+
+<div class="profile-wrapper">
+    <!-- Sidebar -->
+    <div class="sidebar text-center">
+        <img src="@Model.GetAvatarPath()" alt="Аватар" />
+        <h4>@($"{Model.User.Surname} {Model.User.Name} {(string.IsNullOrEmpty(Model.User.Pathronimic) ? "" : Model.User.Pathronimic)}")</h4>
+        <hr />
+        <a class="btn btn-edit w-100 mb-3" href="/EditProfile">Редактировать</a>
+        <a class="btn btn-outline-danger w-100 logout-btn" href="/Logout">Выйти</a>
+    </div>
+
+    <!-- Main content -->
+    <div class="main-content">
+        <!-- Контактные данные -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Контактная информация</h5>
+            </div>
+            <div class="info-row">
+                <div class="info-block"><label>Телефон</label><div>@Model.User.ContactNumber</div></div>
+                <div class="info-block"><label>Email</label><div>@Model.User.Email</div></div>
+                <div class="info-block"><label>Логин</label><div>@Model.User.Login</div></div>
+            </div>
+        </div>
+
+        <!-- Данные компании -->
+        <div class="card">
+            <h5>Компания</h5>
+            <div class="info-row">
+                <div class="info-block"><label>Название</label><div>@Model.User.NameCompany</div></div>
+                <div class="info-block"><label>ИНН</label><div>@Model.User.Inn</div></div>
+                <div class="info-block"><label>КПП</label><div>@Model.User.Kpp</div></div>
+                <div class="info-block"><label>Должность</label><div>@Model.User.Post</div></div>
+            </div>
+        </div>
+
+        <!-- Банковские карты -->
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Банковские карты</h5>
+                <a href="/AddBankCard" class="btn btn-sm btn-primary">Добавить карту</a>
+            </div>
+            <div class="card-body">
+                @if (Model.BankCards.Any())
+                {
+                    <div class="bank-cards-list">
+                        @foreach (var card in Model.BankCards)
+                        {
+                            <div class="bank-card-item @(card.IsDefault ? "default-card" : "")">
+                                <div class="card-info">
+                                    <div class="d-flex justify-content-between">
+                                        <h6>@card.BankName</h6>
+                                        @if (card.IsDefault)
+                                        {
+                                            <span class="badge bg-primary">Основная</span>
+                                        }
+                                    </div>
+                                    <div class="info-row">
+                                        <div class="info-block"><label>Номер карты</label><div>**** **** **** @card.CardNumber[^4..]</div></div>
+                                        <div class="info-block"><label>Срок действия</label><div>@card.ValidityPeriod</div></div>
+                                    </div>
+                                </div>
+                                <div class="card-actions">
+                                    <form method="post" asp-page-handler="SetDefaultCard" asp-route-idBankCard="@card.IdBankCard" class="d-inline">
+                                        <button type="submit" class="btn btn-sm @(card.IsDefault ? "btn-primary" : "btn-outline-primary")" @(card.IsDefault ? "disabled" : "")>
+                                            Сделать основной
+                                        </button>
+                                    </form>
+                                    <form method="post" asp-page-handler="DeleteCard" asp-route-idBankCard="@card.IdBankCard" onsubmit="return confirm('Вы уверены, что хотите удалить эту банковскую карту?');" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                                    </form>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">У вас пока нет добавленных банковских карт.</p>
+                }
+            </div>
+        </div>
+
+        <!-- История заказов -->
+        <div class="card">
+            <h5>Последние заказы</h5>
+            @if (Model.Orders.Any())
+            {
+                <table class="table table-sm table-bordered mt-2">
+                    <thead class="table-light">
+                        <tr>
+                            <th>ID</th>
+                            <th>Метод доставки</th>
+                            <th>Адрес</th>
+                            <th>Сумма</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td>@order.IdOrder</td>
+                                <td>@order.DeliveryMethod</td>
+                                <td>@(order.Street ?? "") @(order.House ?? "")</td>
+                                <td>@order.TotalPrice ₽</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <p class="text-muted">Вы ещё не совершали заказов.</p>
+            }
+        </div>
+
+        <!-- Раздел безопасности -->
+        <div class="card">
+            <h5>Безопасность</h5>
+            <div>
+                <a href="/ForgotPassword" class="btn btn-outline-secondary me-2">Сменить пароль</a>
+            </div>
+        </div>
+    </div>
+</div>
+<p></p>
+<label class="end-text"></label>

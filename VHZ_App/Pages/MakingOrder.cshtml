@@ -1,0 +1,124 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model MakingOrderModel
+@{
+    ViewData["Title"] = "Оформление заказа";
+}
+<p class="otstup" />
+<label class="cart-lbl">Оформление заказа</label>
+<p class="otstup" />
+<p class="otstup" />
+<label class="txt-cart-14">Способ получения:</label>
+<br/>
+<input name="delivery" type="radio" value="доставка" class="radio-delivery" />
+<label class="txt-cart-14">Доставка</label>
+<br />
+<input name="delivery" type="radio" value="самовывоз" class="radio-delivery" />
+<label class="txt-cart-14">Самовывоз</label>
+<br />
+<p class="otstup" />
+
+<div id="order-card">
+    <label id="to-making-txt">К офрмлению:</label>
+    <br />
+    <br />
+    @foreach (var cart in Model.selectedCard)
+    {
+        <label class="product-order txt-cart">@cart.IdProductNavigation.NameProduct</label>
+        <label class="amount-margin txt-cart">@cart.IdProductNavigation.Price</label>
+        <label class="amount-sht txt-cart">руб/шт</label>
+        <br />
+        <label class="price-margin txt-cart">@cart.AmountProducts</label>
+        <label class="sht-margin txt-cart">шт.</label>
+        <label class="amount-margin txt-cart">@(@cart.AmountProducts * @cart.IdProductNavigation.Price)</label>
+        <label class="amount-sht txt-cart">руб</label>
+        <br />
+        <br />
+    }
+    
+
+    <label class="product-order txt-cart">Доставка</label>
+    <label class="amount-sht txt-cart">Бесплатно</label>
+    <p />
+    <label class="product-order txt-16">ИТОГО</label>
+    <label class="price-margin txt-16">@Model.amount</label>
+    <label class="sht-margin txt-16">шт.</label>
+    <label class="amount-margin txt-16">@Model.price</label>
+    <label class="amount-sht txt-16">руб</label>
+</div>
+<p class="otstup"></p>
+<p></p>
+<label>Укажите адрес:</label>
+<br/>
+<form method="post">
+    <p />
+<input type="text" placeholder="Область" class="addres-input" name="Area" />
+<p/>
+    <p />
+
+<input type="text" placeholder="Населённый пункт" class="addres-input" name="Locality"/>
+<p/>
+<input type="text" placeholder="Улица" class="addres-input" name="Street"/>
+<p/>
+<input type="text" placeholder="Дом" class="addres-input" name="House"/>
+</form>
+
+<p class="otstup"></p> 
+<p></p>
+
+<label>Выберите карту:</label>
+<div class="card-body">
+    @if (Model.BankCards.Any())
+    {
+        <div class="bank-cards-list">
+            @foreach (var card in Model.BankCards)
+            {
+                <div class="bank-card-item @(card.IsDefault ? "default-card" : "")">
+                    <div class="card-info">
+                        <div class="d-flex justify-content-between">
+                            <h6>@card.BankName</h6>
+                            @if (card.IsDefault)
+                            {
+                                <span class="badge bg-primary">Основная</span>
+                            }
+                        </div>
+                        <div class="info-row">
+                            <div class="info-block"><label>Номер карты</label><div>**** **** **** @card.CardNumber[^4..]</div></div>
+                            <div class="info-block"><label>Срок действия</label><div>@card.ValidityPeriod</div></div>
+                        </div>
+                    </div>
+                    <div class="card-actions">
+                        <form method="post" asp-page-handler="SetDefaultCard" asp-route-idBankCard="@card.IdBankCard" class="d-inline">
+                            <button type="submit" class="btn btn-sm @(card.IsDefault ? "btn-primary" : "btn-outline-primary")" @(card.IsDefault ? "disabled" : "")>
+                                Сделать основной
+                            </button>
+                        </form>
+                        <form method="post" asp-page-handler="DeleteCard" asp-route-idBankCard="@card.IdBankCard" onsubmit="return confirm('Вы уверены, что хотите удалить эту банковскую карту?');" class="d-inline">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                        </form>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">У вас пока нет добавленных банковских карт.</p>
+    }
+</div>
+<p class="otstup"></p>
+<p></p>
+<button id="btn-cart-oform" onclick="openModal()">Заказать</button>
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <h2>Подтверждение заказа</h2>
+        <p>Вы уверены, что хотите совершить заказ?</p>
+        <div class="d-none d-sm-flex align-items-center div-btn-modal">
+            <button id="btn-making-order" onclick="window.location.href='/Cart'">Заказать</button>
+            <button id="btn-close" onclick="closeModal()">Отменить</button>
+        </div>
+        
+    </div>
+</div>
+<label class="end-text"></label>

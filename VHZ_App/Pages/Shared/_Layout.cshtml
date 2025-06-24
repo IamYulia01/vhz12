@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Владимирский химический завод</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/VHZ_App.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm" style="background-color: #DCD1FF;">
+            <div class="container-fluid">
+                <!-- Логотип -->
+                <a class="navbar-brand" asp-area="" asp-page="/Index">
+                    <img src="~/Image/logo.svg" alt="ВХЗ" height="40" class="d-inline-block align-top">
+                </a>
+
+                <!-- Иконки и кнопка меню -->
+                <div class="d-none d-sm-flex ms-auto align-items-center">
+                    <!-- Корзина -->
+                    <a class="nav-link text-dark mx-2" asp-area="" asp-page="/Cart">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                    </a>
+                    <!-- Аккаунт -->
+                    <a class="nav-link text-dark mx-2" asp-area="" asp-page="/Account">
+                        <i class="fas fa-user fa-lg"></i>
+                    </a>
+                    <!-- Кнопка меню (стилизованная под иконки) -->
+                    <button class="nav-link text-dark mx-2 p-0 bg-transparent border-0" type="button"
+                            data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar">
+                        <i class="fas fa-bars fa-lg"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Боковое меню -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Меню</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Catalog">КАТАЛОГ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/About">О НАС</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Contacts">КОНТАКТЫ</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-page="/Account">АККАУНТ</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer" style="background-color: #DCD1FF;">
+        <div class="container py-2">
+            <div class="row align-items-center">
+                <!-- Контакты -->
+                <div class="col-md-8">
+                    <p class="mb-2" style="line-height: 2;">
+                        <i class="fas fa-phone me-2"></i>+7 4922 49 51 50<br>
+                        <i class="fas fa-envelope me-2"></i>vinz@vinz31.ru<br>
+                        <i class="fas fa-map-marker-alt me-2"></i>600000 г. Владимир, ул. Б. Нижегородская, 81
+                    </p>
+                </div>
+
+                <!-- Логотип -->
+                <div class="col-md-4 text-md-end">
+                    <a class="footer-logo" asp-page="/Index">
+                        <img src="~/Image/logo.svg" alt="ВХЗ" class="footer-logo-img">
+                    </a>
+                </div>
+            </div>
+
+            <!-- Копирайт -->
+            <div class="row mt-2" style="font-size: 15px"> 
+                <div class="col-12 text-center">
+                    &copy; 2025 ВХ3. Все права защищены.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

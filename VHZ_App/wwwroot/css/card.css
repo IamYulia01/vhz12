@@ -1,0 +1,11 @@
+﻿.btn-vhz {
+    background-color: #6a0dad;
+    border-color: #6a0dad;
+    color: white;
+}
+
+    .btn-vhz:hover {
+        background-color: #4d0a8f;
+        border-color: #4d0a8f;
+        color: white;
+    }

@@ -1,0 +1,102 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\Image\image1.png" />
+    <Content Remove="wwwroot\Image\image10.png" />
+    <Content Remove="wwwroot\Image\image11.png" />
+    <Content Remove="wwwroot\Image\image13.png" />
+    <Content Remove="wwwroot\Image\image14.png" />
+    <Content Remove="wwwroot\Image\image16.png" />
+    <Content Remove="wwwroot\Image\image17.png" />
+    <Content Remove="wwwroot\Image\image18.png" />
+    <Content Remove="wwwroot\Image\image19.png" />
+    <Content Remove="wwwroot\Image\image2.png" />
+    <Content Remove="wwwroot\Image\image20.png" />
+    <Content Remove="wwwroot\Image\image21.png" />
+    <Content Remove="wwwroot\Image\image22.png" />
+    <Content Remove="wwwroot\Image\image23.png" />
+    <Content Remove="wwwroot\Image\image24.png" />
+    <Content Remove="wwwroot\Image\image25.png" />
+    <Content Remove="wwwroot\Image\image26.png" />
+    <Content Remove="wwwroot\Image\image27.png" />
+    <Content Remove="wwwroot\Image\image28.png" />
+    <Content Remove="wwwroot\Image\image29.png" />
+    <Content Remove="wwwroot\Image\image3.png" />
+    <Content Remove="wwwroot\Image\image5.png" />
+    <Content Remove="wwwroot\Image\image6.png" />
+    <Content Remove="wwwroot\Image\image7.png" />
+    <Content Remove="wwwroot\Image\image8.png" />
+    <Content Remove="wwwroot\Image\image9.png" />
+    <Content Remove="wwwroot\Image\Главнаое.png" />
+    <Content Remove="wwwroot\Image\Главное2.png" />
+    <Content Remove="wwwroot\Image\Главное3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="wwwroot\Image\logo.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\Image\image11.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="4.12.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MimeKit" Version="4.12.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="VisualStudio.gitignore" Version="1.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="wwwroot\Image\image1.png" />
+    <Resource Include="wwwroot\Image\image10.png" />
+    <Resource Include="wwwroot\Image\image13.png" />
+    <Resource Include="wwwroot\Image\image14.png" />
+    <Resource Include="wwwroot\Image\image16.png" />
+    <Resource Include="wwwroot\Image\image17.png" />
+    <Resource Include="wwwroot\Image\image18.png" />
+    <Resource Include="wwwroot\Image\image19.png" />
+    <Resource Include="wwwroot\Image\image2.png" />
+    <Resource Include="wwwroot\Image\image20.png" />
+    <Resource Include="wwwroot\Image\image21.png" />
+    <Resource Include="wwwroot\Image\image22.png" />
+    <Resource Include="wwwroot\Image\image23.png" />
+    <Resource Include="wwwroot\Image\image24.png" />
+    <Resource Include="wwwroot\Image\image25.png" />
+    <Resource Include="wwwroot\Image\image26.png" />
+    <Resource Include="wwwroot\Image\image27.png" />
+    <Resource Include="wwwroot\Image\image28.png" />
+    <Resource Include="wwwroot\Image\image29.png" />
+    <Resource Include="wwwroot\Image\image3.png" />
+    <Resource Include="wwwroot\Image\image5.png" />
+    <Resource Include="wwwroot\Image\image6.png" />
+    <Resource Include="wwwroot\Image\image7.png" />
+    <Resource Include="wwwroot\Image\image8.png" />
+    <Resource Include="wwwroot\Image\image9.png" />
+    <Resource Include="wwwroot\Image\logo.svg" />
+    <Resource Include="wwwroot\Image\Главное.png" />
+    <Resource Include="wwwroot\Image\Главное2.png" />
+    <Resource Include="wwwroot\Image\Главное3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\uploads\avatars\" />
+  </ItemGroup>
+
+</Project>

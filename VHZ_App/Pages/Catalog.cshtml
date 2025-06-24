@@ -1,0 +1,71 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model CatalogModel
+@{
+    ViewData["Title"] = "Каталог";
+}
+
+<p/>
+<form method="post" asp-antiforgery="true" asp-page-handler="Search">
+    <div class="container-fluid px-0">
+        <input type="text"
+               placeholder="Поиск"
+               class="found-input"
+               asp-for="foundPole" />
+        <button type="submit" class="btn-class">Найти</button>
+    </div>
+</form>
+<p></p>
+<!-- Форма фильтрации -->
+<form method="post" asp-antiforgery="true" asp-page-handler="Filter">
+    <div class="container-fluid px-0">
+        <select asp-for="SelectedType" class="dropDownList">
+            <option value="all">Все</option>
+            <option value="first">Пластифицированные гранулированные ПВХ-материалы</option>
+            <option value="second">Пластифицированные листовые ПВХ-материалы</option>
+            <option value="thred">Непластифицированные ПВХ-материалы</option>
+            <option value="four">Изделия из стеклопластика</option>
+        </select>
+        <button type="submit" class="btn-class">Фильтр</button>
+    </div>
+</form>
+<p class="otstup"/>
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}
+@foreach(var product in Model.CatalogProducts)
+{
+    string way = "/Image/" + @product.Image;
+    <form method="post" asp-page-handler="SelectProduct">
+    <input type="hidden" name="idProduct" value="@product.IdProduct" />
+    <div class="card-catalog" onclick="this.closest('form').submit()">
+        <div class="div-img">
+            <img id="mainImage" src="@way" alt="Владимирский химический завод" class="responsive-image">
+        </div>
+        <label class="price-kg">Цена за 10кг</label>
+        <p class="lbl-p" />
+        <label class="price">@product.Price.ToString("#.##") руб</label>
+        <p class="lbl-p" />
+        <label class="lbl-catalog">@product.NameProduct</label>
+        <p class="lbl-p" />
+        <label class="lbl-catalog">@product.Appointment</label>
+        <p class="lbl-p" />
+        <label class="lbl-catalog">@product.ProductCompliance</label>
+        <p class="lbl-p" />
+            
+    </div>
+    </form>
+    <form method="post" asp-page-handler="AddCart" asp-route-idProduct="@product.IdProduct" asp-route-idUser="@Model.idUser">
+            <button type="submit" class="add-bascket-btn">Добавить в корзину</button>
+        </form>
+    
+    <p class="otstup" />
+}
+
+<p></p>
+<label class="end-text"></label>
+

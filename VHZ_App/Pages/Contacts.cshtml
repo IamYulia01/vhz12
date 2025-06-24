@@ -1,0 +1,57 @@
+﻿@page
+@model VHZ_App.Pages.ContactsModel
+@{
+    ViewData["Title"] = "Контакты";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/contacts.css" />
+}
+
+<div class="contacts-container">
+    <div class="contact-header">
+        <h1>Контакты компании</h1>
+        <p>Свяжитесь с нашими сотрудниками</p>
+    </div>
+
+    @if (Model.Contacts.Any())
+    {
+        <div class="contact-grid">
+            @foreach (var contact in Model.Contacts)
+            {
+                <div class="contact-card">
+                    @if (!string.IsNullOrEmpty(contact.NameContact))
+                    {
+                        <h2 class="contact-name">@contact.NameContact</h2>
+                    }
+                    
+                    <div class="contact-info-row">
+                        @if (!string.IsNullOrEmpty(contact.NumberPhone))
+                        {
+                            <div class="contact-info">
+                                <span class="contact-icon"><i class="bi bi-telephone"></i></span>
+                                <span>@contact.NumberPhone</span>
+                            </div>
+                        }
+                        
+                        @if (!string.IsNullOrEmpty(contact.Email))
+                        {
+                            <div class="contact-info">
+                                <span class="contact-icon"><i class="bi bi-envelope"></i></span>
+                                <a href="mailto:@contact.Email" class="contact-email">@contact.Email</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> Контактная информация будет доступна в ближайшее время
+        </div>
+    }
+</div>
+<p></p>
+<label class="end-text"></label>

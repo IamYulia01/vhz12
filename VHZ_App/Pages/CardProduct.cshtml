@@ -1,0 +1,46 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model VHZ_App.Pages.CardProductModel
+@{
+    ViewData["Title"] = "Карта продукта";
+}
+<p></p>
+<label class="txt-cart-16">@Model.Product.NameProduct</label>
+<p></p>
+<br />
+<label class="gost">@Model.Product.ProductCompliance</label>
+<p></p>
+<br />
+<label class="txt-cart-14"><b class="fst-italic">Тип: </b>@Model.Product.Type</label>
+<p></p>
+<br />
+<label class="txt-cart-14"><b class="fst-italic">Описание:</b> @Model.Product.DescriptionProduct</label>
+<p></p>
+<br />
+<label class="txt-cart-14"><b class="fst-italic">Назначение:</b> @Model.Product.Appointment</label>
+<p></p>
+<br />
+<table class="table-custom .table-bordered">
+    <colgroup>
+        <col width="40%">
+        <col width="60%"> 
+    </colgroup>
+    <thead class="head">
+        <tr>
+            <td>Характеристика</td>
+            <td>Значение</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var spetification in Model.Spetifications)
+        {
+            <tr>
+                <td>@spetification.NameIndicator</td>
+                <td>@spetification.Standard</td>
+            </tr>
+        }
+    </tbody>
+</table>
+<p></p>
+<label class="end-text"></label>

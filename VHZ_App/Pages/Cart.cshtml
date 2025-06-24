@@ -1,0 +1,83 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model VHZ_App.Pages.CartModel
+@{
+    ViewData["Title"] = "Корзина";
+}
+<p class="otstup" />
+<label class="cart-lbl">Корзина</label>
+<p class="otstup" />
+<p class="otstup" />
+<label class="txt-cart">Количество товаров в корзине:</label>
+<label class="cart-amount txt-cart">@Model.amount</label>
+<label class="cart-amount-sht txt-cart">шт</label>
+<br/>
+@if (@Model.amount==0)
+{
+    <h1>Корзина пуста</h1>
+    <p></p>
+}
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}
+<p></p>
+<form method="post" asp-page-handler="BuySelectedProducts">
+@foreach (var cart in Model.CartProducts)
+{
+    string way = "/Image/" + @cart.IdProductNavigation.Image;
+    <div class="card-catalog">
+        <input type="checkbox"
+                   class="check-cart"
+                   name="selectedProducts"
+                   value="@cart.IdCart" />
+            <input type="hidden" name="idProduct" value="@cart.IdProduct" />
+            <div onclick="this.closest('form').submit()">
+                <div class="div-img">
+                    <img id="mainImage" src="@way" alt="Владимирский химический завод" class="responsive-image">
+                </div>
+                <label class="price-kg">Цена за 10кг</label>
+                <p class="lbl-p" />
+                <label class="price">@cart.IdProductNavigation.Price.ToString("#.##") руб</label>
+                <p class="lbl-p" />
+                <label class="lbl-catalog">@cart.IdProductNavigation.NameProduct</label>
+                <p class="lbl-p" />
+                <label class="lbl-catalog">@cart.IdProductNavigation.Appointment</label>
+                <p class="lbl-p" />
+                <label class="lbl-catalog">@cart.IdProductNavigation.ProductCompliance</label>
+                <p class="lbl-p" />
+
+            </div>
+        <div class="d-none d-sm-flex ms-auto align-items-center">
+            <form method="post" asp-page-handler="DeleteCart" asp-route-idCart="@cart.IdCart">
+                <button class="btn-cart">
+                    <i class="cart-remove-icon fas fa-trash-alt"></i>
+                </button>
+            </form>
+            <form method="post" asp-page-handler="MinusAmount" asp-route-idCart="@cart.IdCart">
+                <button type="submit" class="btn-minus" type="button">-</button>
+            </form>
+            <input type="number" class="form-control text-center quantity-input" value="@cart.AmountProducts" min="1" max="20" />
+            <form method="post" asp-page-handler="PlusAmount" asp-route-idCart="@cart.IdCart">
+                <button type="submit"  class="btn-plus" type="button">+</button>
+            </form>
+            <form method="post" asp-page-handler="BuyProduct" asp-route-idCart="@cart.IdCart">
+                <button type="submit" class="buy-bascket-btn" >Купить</button>
+            </form>
+        </div>
+      </div>
+    
+    <p></p>
+}
+
+<label class="txt-cart-16">ИТОГО:</label>
+<label class="cart-amount txt-cart-16">@Model.price.ToString("#.##")</label>
+<label class="cart-amount-sht txt-cart-16">руб</label>
+<button type="submit" id="btn-cart-oform">К оформлению</button>
+
+</form>
+<label class="end-text"></label>
+<p></p>
