@@ -1,0 +1,69 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model ConfirmationModel
+@{
+    ViewData["Title"] = "Заказ";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/profile.css" />
+}
+<h2>Подтверждение заказа</h2>
+<p class="otstup" />
+<div id="order-card">
+    <label id="to-making-txt">К офрмлению:</label>
+    <br />
+    <br />
+    @foreach (var cart in Model.selectedCard)
+    {
+        <label class="product-order txt-cart">@cart.IdProductNavigation.NameProduct</label>
+        <label class="amount-margin txt-cart">@cart.IdProductNavigation.Price.ToString("#.##")</label>
+        <label class="amount-sht txt-cart">руб/шт</label>
+        <br />
+        <label class="price-margin txt-cart">@cart.AmountProducts</label>
+        <label class="sht-margin txt-cart">шт.</label>
+        <label class="amount-margin txt-cart">@((@cart.AmountProducts * @cart.IdProductNavigation.Price).ToString("#.##"))</label>
+        <label class="amount-sht txt-cart">руб</label>
+        <br />
+        <br />
+    }
+
+
+    <label class="product-order txt-cart">Доставка</label>
+    <label class="amount-sht txt-cart">@Model.deliveryPrice</label>
+    <p />
+    <label class="product-order txt-16">ИТОГО</label>
+    <label class="price-margin txt-16">@Model.amount</label>
+    <label class="sht-margin txt-16">шт.</label>
+    <label class="amount-margin txt-16">@Model.price.ToString("#.##")</label>
+    <label class="amount-sht txt-16">руб</label>
+</div>
+@if(Model.order.DeliveryMethod=="доставка")
+{
+    <p></p>
+    <p><b class="fst-italic">Адрес:</b> @Model.order.Area обл, @Model.order.Locality, ул. @Model.order.Street, д. @Model.order.House</p>
+}
+<p></p>
+<div class="bank-card-item default-card">
+    <div class="card-info">
+        <div class="d-flex justify-content-between">
+            <h6>@Model.order.IdBankCardNavigation.BankName</h6>
+        </div>
+
+        <div class="info-row">
+            <div class="info-block"><label>Номер карты</label><div>**** **** **** @Model.order.IdBankCardNavigation.CardNumber[^4..]</div></div>
+            <div class="info-block"><label>Срок действия</label><div>@Model.order.IdBankCardNavigation.ValidityPeriod</div></div>
+        </div>
+    </div>
+</div>
+<p class="otstup"></p>
+
+<p>Вы уверены, что хотите совершить заказ?</p>
+    <form method="post" asp-page-handler="OrderGo">
+    <button id="btn-making-order">Заказать</button>
+    </form>
+    <form method="post" asp-page-handler="OrderClose">
+    <button id="btn-close">Отменить</button>
+    </form>
+<label class="end-text"></label>
+<p class="otstup"></p>

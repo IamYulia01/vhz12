@@ -99,7 +99,6 @@
                 <table class="table table-sm table-bordered mt-2">
                     <thead class="table-light">
                         <tr>
-                            <th>ID</th>
                             <th>Метод доставки</th>
                             <th>Адрес</th>
                             <th>Сумма</th>
@@ -109,7 +108,6 @@
                         @foreach (var order in Model.Orders)
                         {
                             <tr>
-                                <td>@order.IdOrder</td>
                                 <td>@order.DeliveryMethod</td>
                                 <td>@(order.Street ?? "") @(order.House ?? "")</td>
                                 <td>@order.TotalPrice ₽</td>

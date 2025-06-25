@@ -11,6 +11,13 @@
 <p class="otstup" />
 <label class="cart-lbl">Оформление заказа</label>
 <p class="otstup" />
+@if (!string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <div class="alert alert-danger">
+        @Model.ErrorMessage
+    </div>
+}
+<form method="post" asp-page-handler="PlaceOrder">
 <p class="otstup" />
 <label class="txt-cart-14">Способ получения:</label>
 <br/>
@@ -21,41 +28,10 @@
 <label class="txt-cart-14">Самовывоз</label>
 <br />
 <p class="otstup" />
-
-<div id="order-card">
-    <label id="to-making-txt">К офрмлению:</label>
-    <br />
-    <br />
-    @foreach (var cart in Model.selectedCard)
-    {
-        <label class="product-order txt-cart">@cart.IdProductNavigation.NameProduct</label>
-        <label class="amount-margin txt-cart">@cart.IdProductNavigation.Price</label>
-        <label class="amount-sht txt-cart">руб/шт</label>
-        <br />
-        <label class="price-margin txt-cart">@cart.AmountProducts</label>
-        <label class="sht-margin txt-cart">шт.</label>
-        <label class="amount-margin txt-cart">@(@cart.AmountProducts * @cart.IdProductNavigation.Price)</label>
-        <label class="amount-sht txt-cart">руб</label>
-        <br />
-        <br />
-    }
-    
-
-    <label class="product-order txt-cart">Доставка</label>
-    <label class="amount-sht txt-cart">Бесплатно</label>
-    <p />
-    <label class="product-order txt-16">ИТОГО</label>
-    <label class="price-margin txt-16">@Model.amount</label>
-    <label class="sht-margin txt-16">шт.</label>
-    <label class="amount-margin txt-16">@Model.price</label>
-    <label class="amount-sht txt-16">руб</label>
-</div>
-<p class="otstup"></p>
 <p></p>
 <label>Укажите адрес:</label>
 <br/>
-<form method="post">
-    <p />
+<p />
 <input type="text" placeholder="Область" class="addres-input" name="Area" />
 <p/>
     <p />
@@ -65,10 +41,9 @@
 <input type="text" placeholder="Улица" class="addres-input" name="Street"/>
 <p/>
 <input type="text" placeholder="Дом" class="addres-input" name="House"/>
-</form>
 
 <p class="otstup"></p> 
-<p></p>
+
 
 <label>Выберите карту:</label>
 <div class="card-body">
@@ -103,17 +78,10 @@
 
 <p class="otstup"></p>
 <p></p>
-<button class="btn-cart-oform" onclick="openModal()">Заказать</button>
+
+<button class="btn-cart-oform">Заказать</button>
+    </form>
+<p />
 <label class="end-text"></label>
-<p class="otstup"></p>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <h2>Подтверждение заказа</h2>
-        <p>Вы уверены, что хотите совершить заказ?</p>
-        <div class="d-none d-sm-flex align-items-center div-btn-modal">
-            <button id="btn-making-order" onclick="window.location.href='/Cart'">Заказать</button>
-            <button id="btn-close" onclick="closeModal()">Отменить</button>
-        </div>
-        
-    </div>
-</div>
+<p />
+<p></p>

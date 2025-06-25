@@ -1,0 +1,148 @@
+﻿/* Основные стили для каталога */
+.product-card-wrapper {
+    margin-bottom: 0px;
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+    background-color: #e6e6e6;
+}
+
+.card-content {
+    padding: 20px 20px 0 20px;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.product-actions {
+    display: flex;
+    flex-direction: column;
+    margin-top: -1px;
+}
+
+.details-btn,
+.add-basket-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.details-btn {
+    background-color: #DCD1FF;
+    color: black;
+    border-radius: 0;
+    margin-top: -3%;
+}
+
+    .details-btn:hover {
+        background-color: #b199ff;
+    }
+
+.add-basket-btn {
+    background-color: #3401bb;
+    color: white;
+    border-radius: 0 0 15px 15px;
+}
+
+    .add-basket-btn:hover {
+        background-color: #2a0199;
+    }
+
+/* Остальные стили */
+.image-container {
+    flex: 0 0 150px;
+    height: 210px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.responsive-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.text-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-bottom: 0; /* Убираем нижний отступ */
+}
+
+.price-section {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.price-per {
+    font-size: 12px;
+    color: #8A8A8A;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+    color: #3401bb;
+    margin-top: 5px;
+}
+
+.product-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.product-description,
+.product-compliance {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+    margin: 0;
+    white-space: normal;
+}
+
+.product-type-header {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3401bb;
+}
+
+/* Стили для форм поиска/фильтрации (оставить без изменений) */
+.container-fluid {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.found-input, .dropDownList {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    flex-grow: 1;
+}
+
+.btn-class {
+    padding: 8px 20px;
+    background-color: #3401bb;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.otstup {
+    margin: 10px 0;
+}

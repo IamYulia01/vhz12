@@ -1,4 +1,3 @@
-/* Why Us Section Styles */
 .why-us-container {
     background-color: #f8f9fa;
 }
@@ -33,7 +32,6 @@
     margin-bottom: 0;
 }
 
-/* Responsive Adjustments */
 @media (max-width: 768px) {
     .why-us-item {
         padding: 15px;
@@ -44,7 +42,6 @@
     }
 }
 
-/* Base Styles */
 html {
     position: relative;
     min-height: 100%;
@@ -61,7 +58,6 @@ body {
     flex: 1;
     padding-bottom: 20px; /* Дополнительный отступ */
 }
-/* Header Styles */
 header {
     position: sticky;
     top: 0;
@@ -78,7 +74,6 @@ header {
     height: 60px;
 }
 
-/* Offcanvas Menu */
 .offcanvas {
     width: 280px;
     background-color: #f8f9fa;
@@ -90,7 +85,6 @@ header {
     border-bottom: 1px solid #eee;
 }
 
-/* Footer Styles */
 .footer {
     position: absolute;
     bottom: 0;
@@ -106,7 +100,6 @@ header {
 }
 
 
-/* Image Container Styles */
 .image-container {
     width: 100%;
     max-width: 1200px;
@@ -124,7 +117,6 @@ header {
     object-fit: contain;
 }
 
-/* Arrow Navigation */
 .arrow-left, .arrow-right {
     transition: transform 0.2s, background-color 0.2s;
 }
@@ -134,7 +126,6 @@ header {
         background-color: #f8f9fa !important;
     }
 
-/* Responsive Adjustments */
 @media (min-width: 768px) {
     html {
         font-size: 16px;
@@ -152,7 +143,6 @@ header {
         }
 }
 
-/* Window Size Warning */
 .size-warning {
     display: none;
     position: fixed;
@@ -170,7 +160,6 @@ header {
         display: block;
     }
 }
-/* Стили для формы обратной связи */
 .feedback-card {
     border-radius: 10px;
     border: none;
@@ -215,17 +204,14 @@ html {
     box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-/* Стили для шапки */
 .navbar {
     padding: 0.5rem 1rem;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* Стили для бокового меню */
 .offcanvas {
     width: 250px;
 }
-/* Стили для кнопки меню */
 .navbar-toggler {
     border: none;
     padding: 0.25rem 0.5rem;
@@ -235,7 +221,6 @@ html {
         box-shadow: none;
     }
 
-/* Боковое меню */
 .offcanvas {
     width: 280px;
     background-color: #f8f9fa;
@@ -250,7 +235,6 @@ html {
     .offcanvas-body .nav-link:hover {
         background-color: #e9ecef;
     }
-/* Стили для иконок */
 .navbar .nav-link i {
     font-size: 1.5rem;
     transition: all 0.3s ease;
@@ -261,13 +245,11 @@ html {
     opacity: 0.9;
 }
 
-/* Основные стили для правильного позиционирования */
 body {
     margin: 0;
     padding-bottom: 120px;
 }
 
-/* Стили подвала */
 .footer {
     position: absolute;
     bottom: 0;
@@ -276,7 +258,6 @@ body {
     background-color: #DCD1FF;
     padding: 1rem 0;
 }
-/* Стили для кнопки меню (под иконки) */
 .navbar .btn-menu {
     background: transparent;
     border: none;
@@ -284,7 +265,6 @@ body {
     margin: 0 0.5rem;
     line-height: 1;
 }
-/* Стили для полноразмерного изображения */
 .full-width-image {
     width: 100%;
     overflow: hidden;
@@ -294,17 +274,15 @@ body {
         width: 100%;
         height: auto;
         display: block;
-        object-fit: cover; /* Для сохранения пропорций */
-        min-height: 300px; /* Минимальная высота (настройте по необходимости) */
+        object-fit: cover; 
+        min-height: 300px; 
     }
 
-/* Для контроля высоты на больших экранах */
 @media (min-width: 992px) {
     .full-width-image img {
-        max-height: 80vh; /* Ограничение высоты */
+        max-height: 80vh; 
     }
 }
-/* Единые стили для всех иконок в шапке */
 .navbar .nav-link,
 .navbar .btn-menu {
     display: inline-flex;
@@ -326,9 +304,9 @@ body {
         transform: scale(1.15);
         color: #000;
     }
-/* Основное содержимое */
+
 main {
-    padding-bottom: 2rem; /* Отступ от подвала */
+    padding-bottom: 2rem;
 }
 
 .footer-logo-img {
@@ -477,13 +455,13 @@ header {
 }
 
 .quantity-selector {
-    max-width: 120px; /* ограничиваем ширину */
+    max-width: 120px; 
 }
 
 .quantity-input {
-    width: 50px; /* фиксированная ширина поля */
-    margin: 0 5px; /* отступы между кнопками */
-    -moz-appearance: textfield; /* убираем стрелки в Firefox */
+    width: 50px; 
+    margin: 0 5px;
+    -moz-appearance: textfield; 
 }
 
 .btn btn-outline-secondary minus-btn {
@@ -492,7 +470,7 @@ header {
 
 .quantity-input::-webkit-outer-spin-button,
 .quantity-input::-webkit-inner-spin-button {
-    -webkit-appearance: none; /* убираем стрелки в Chrome/Safari */
+    -webkit-appearance: none;
     margin: 0;
 }
 
@@ -654,24 +632,23 @@ header {
     width: 100%;
     margin: 20px 0;
     font-family: Arial, sans-serif;
-    border-collapse: separate; /* Включить раздельные границы */
-    border-spacing: 0; /* Убрать промежутки между ячейками */
+    border-collapse: separate;
+    border-spacing: 0;
     border: 1px solid black;
-    border-radius: 8px; /* Теперь скругление работает */
+    border-radius: 8px;
     overflow: hidden;
 }
 
     .table-custom th, .table-custom td {
         padding: 12px 15px;
         text-align: left;
-        border: 2px solid black; /* разделитель строк */
+        border: 2px solid black;
     }
 
     .table-custom th {
         font-weight: bold;
     }
 
-    /* Зебра (чередование строк) */
     .table-custom tr:nth-child(even) {
         background-color: #DCD1FF;
     }
@@ -690,14 +667,14 @@ header {
 }
 
 .modal {
-    display: none; /* Скрыто по умолчанию */
+    display: none; 
     position: fixed;
     z-index: 1000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.5); /* Полупрозрачный фон */
+    background-color: rgba(0,0,0,0.5); 
 }
 
 .modal-content {
@@ -713,21 +690,17 @@ header {
     color: white;
     height: 40px;
     float: left;
-    position: absolute;
-    right: 120px;
-    width: 100px;
+    width: 49%;
     background-color: #3401bb;
 }
 
 #btn-close {
     border-radius: 15px;
     height: 40px;
-    position: absolute;
-    right: 10px;
     float: right;
     margin-right: 4px;
     margin-left: 10px;
-    width: 100px;
+    width: 49%;
     background-color: #e6e6e6;
 }
 

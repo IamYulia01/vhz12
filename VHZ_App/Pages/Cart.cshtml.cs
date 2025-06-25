@@ -35,20 +35,26 @@ namespace VHZ_App.Pages
                 price += cart.IdProductNavigation.Price * cart.AmountProducts;
             }
         }
-        public IActionResult OnPost(int idProduct)
+        public IActionResult OnPostSelectProduct(int idProduct)
         {
             HttpContext.Session.SetInt32("ProductId", idProduct);
+
             return RedirectToPage("/CardProduct");
         }
         public IActionResult OnPostBuySelectedCarts([FromForm] List<int> selectedCarts)
         {
+            if (idUser == null)
+            {
+                ErrorMessage = "Войдите в аккаунт!";
+                return RedirectToPage("/Account");
+            }
+
             if (selectedCarts == null || selectedCarts.Count == 0)
             {
                 ErrorMessage = "Выберите хотя бы один товар!";
                 return RedirectToPage();
             }
 
-            // Сохраняем выбранные корзины в сессии
             HttpContext.Session.SetString("SelectedCarts", JsonConvert.SerializeObject(selectedCarts));
             return RedirectToPage("/MakingOrder");
         }

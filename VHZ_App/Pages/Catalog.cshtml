@@ -6,7 +6,11 @@
     ViewData["Title"] = "Каталог";
 }
 
-<p/>
+@section Styles {
+    <link rel="stylesheet" href="~/css/catalog.css" />
+}
+
+<p />
 <form method="post" asp-antiforgery="true" asp-page-handler="Search">
     <div class="container-fluid px-0">
         <input type="text"
@@ -17,55 +21,73 @@
     </div>
 </form>
 <p></p>
-<!-- Форма фильтрации -->
+
 <form method="post" asp-antiforgery="true" asp-page-handler="Filter">
     <div class="container-fluid px-0">
         <select asp-for="SelectedType" class="dropDownList">
             <option value="all">Все</option>
-            <option value="first">Пластифицированные гранулированные ПВХ-материалы</option>
-            <option value="second">Пластифицированные листовые ПВХ-материалы</option>
-            <option value="thred">Непластифицированные ПВХ-материалы</option>
-            <option value="four">Изделия из стеклопластика</option>
+            <option value="Пластифицированные гранулированные ПВХ-материалы">Пластифицированные гранулированные ПВХ-материалы</option>
+            <option value="Пластифицированные листовые ПВХ-материалы">Пластифицированные листовые ПВХ-материалы</option>
+            <option value="Непластифицированные ПВХ-материалы">Непластифицированные ПВХ-материалы</option>
+            <option value="Изделия из стеклопластика">Изделия из стеклопластика</option>
         </select>
         <button type="submit" class="btn-class">Фильтр</button>
     </div>
 </form>
-<p class="otstup"/>
+<p class="otstup" />
+
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
     <div class="alert alert-danger">
         @Model.ErrorMessage
     </div>
 }
-@foreach(var product in Model.CatalogProducts)
+
+@{
+    // Группируем товары по типам
+    var groupedProducts = Model.CatalogProducts
+        .GroupBy(p => p.Type)
+        .OrderBy(g => g.Key);
+}
+
+@foreach (var group in groupedProducts)
 {
-    string way = "/Image/" + @product.Image;
-    <form method="post" asp-page-handler="SelectProduct">
-    <input type="hidden" name="idProduct" value="@product.IdProduct" />
-    <div class="card-catalog" onclick="this.closest('form').submit()">
-        <div class="div-img">
-            <img id="mainImage" src="@way" alt="Владимирский химический завод" class="responsive-image">
+    <h3 class="product-type-header">@group.Key</h3>
+
+    foreach (var product in group)
+    {
+        string way = "/Image/" + @product.Image;
+        <div class="product-card-wrapper">
+            <div class="card-content">
+                <div class="image-container">
+                    <img src="@way" alt="@product.NameProduct" class="responsive-image">
+                </div>
+                <div class="text-content">
+                    <div class="price-section">
+                        <span class="price-per">Цена за 100г</span>
+                        <span class="price">@product.Price.ToString("#.##") руб</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-name">@product.NameProduct</h3>
+                        <p class="product-description">@product.Appointment</p>
+                        <p class="product-compliance">@product.ProductCompliance</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <label class="price-kg">Цена за 10кг</label>
-        <p class="lbl-p" />
-        <label class="price">@product.Price.ToString("#.##") руб</label>
-        <p class="lbl-p" />
-        <label class="lbl-catalog">@product.NameProduct</label>
-        <p class="lbl-p" />
-        <label class="lbl-catalog">@product.Appointment</label>
-        <p class="lbl-p" />
-        <label class="lbl-catalog">@product.ProductCompliance</label>
-        <p class="lbl-p" />
-            
-    </div>
-    </form>
-    <form method="post" asp-page-handler="AddCart" asp-route-idProduct="@product.IdProduct" asp-route-idUser="@Model.idUser">
-            <button type="submit" class="add-bascket-btn">Добавить в корзину</button>
-        </form>
-    
-    <p class="otstup" />
+
+        <div class="product-actions">
+            <form method="post" asp-page-handler="SelectProduct">
+                <input type="hidden" name="idProduct" value="@product.IdProduct" />
+                <button type="submit" class="details-btn">Подробнее</button>
+            </form>
+            <form method="post" asp-page-handler="AddCart" asp-route-idProduct="@product.IdProduct" asp-route-idUser="@Model.idUser">
+                <button type="submit" class="add-basket-btn">Добавить в корзину</button>
+            </form>
+        </div>
+        <div class="otstup"></div>
+    }
 }
 
 <p></p>
 <label class="end-text"></label>
-

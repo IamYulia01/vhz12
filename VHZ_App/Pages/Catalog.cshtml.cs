@@ -71,6 +71,12 @@ namespace VHZ_App.Pages
             HttpContext.Session.SetInt32("ProductId", idProduct);
             return RedirectToPage("/CardProduct");
         }
+        public IActionResult OnPostSelectProduct(int idProduct)
+        {
+            HttpContext.Session.SetInt32("ProductId", idProduct);
+
+            return RedirectToPage("/CardProduct");
+        }
         public async Task<IActionResult> OnPostAddCartAsync(int idProduct)
         {
             try
