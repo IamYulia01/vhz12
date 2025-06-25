@@ -8,62 +8,63 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/profile.css" />
 }
-<label class="cart-lbl">Подтверждение заказа</label>
+<label name="nameConfirmation" class="cart-lbl">Подтверждение заказа</label>
 <p class="otstup" />
-<div id="order-card">
-    <label id="to-making-txt">К оформлению:</label>
+<div name="orderCard" id="order-card">
+    <label name="makingOrderInfo" id="to-making-txt">К оформлению:</label>
     <br />
     <br />
     @foreach (var cart in Model.selectedCard)
     {
-        <label class="product-order txt-cart">@cart.IdProductNavigation.NameProduct</label>
-        <label class="amount-margin txt-cart">@cart.IdProductNavigation.Price.ToString("#.##")</label>
-        <label class="amount-sht txt-cart">руб/шт</label>
+        <label name="nameProduct" class="product-order txt-cart">@cart.IdProductNavigation.NameProduct</label>
+        <label name="price" class="amount-margin txt-cart">@cart.IdProductNavigation.Price.ToString("#.##")</label>
+        <label name="txtRubAmount" class="amount-sht txt-cart">руб/шт</label>
         <br />
-        <label class="price-margin txt-cart">@cart.AmountProducts</label>
-        <label class="sht-margin txt-cart">шт.</label>
-        <label class="amount-margin txt-cart">@((@cart.AmountProducts * @cart.IdProductNavigation.Price).ToString("#.##"))</label>
-        <label class="amount-sht txt-cart">руб</label>
+        <label name="amountProducts" class="price-margin txt-cart">@cart.AmountProducts</label>
+        <label name="txtAmount" class="sht-margin txt-cart">шт.</label>
+        <label name="totalPriceProduct" class="amount-margin txt-cart">@((@cart.AmountProducts * @cart.IdProductNavigation.Price).ToString("#.##"))</label>
+        <label name="txtRub" class="amount-sht txt-cart">руб</label>
         <br />
         <br />
     }
 
 
-    <label class="product-order txt-cart">Доставка</label>
-    <label class="amount-sht txt-cart">@Model.deliveryPrice</label>
+    <label name="txtDelivery" class="product-order txt-cart">Доставка</label>
+    <label name="deliveryPrice" class="amount-sht txt-cart">@Model.deliveryPrice</label>
     <p />
-    <label class="product-order txt-16">ИТОГО</label>
-    <label class="price-margin txt-16">@Model.amount</label>
-    <label class="sht-margin txt-16">шт.</label>
-    <label class="amount-margin txt-16">@Model.price.ToString("#.##")</label>
-    <label class="amount-sht txt-16">руб</label>
+    <label name="txtItog" class="product-order txt-16">ИТОГО</label>
+    <label name="amount" class="price-margin txt-16">@Model.amount</label>
+    <label name="txtAmountTotal" class="sht-margin txt-16">шт.</label>
+    <label name="totalPrice" class="amount-margin txt-16">@Model.price.ToString("#.##")</label>
+    <label name="txtRubTotal" class="amount-sht txt-16">руб</label>
 </div>
 @if(Model.order.DeliveryMethod=="доставка")
 {
     <p></p>
-    <p><b class="fst-italic">Адрес:</b> @Model.order.Area обл, @Model.order.Locality, ул. @Model.order.Street, д. @Model.order.House</p>
+    <p name="address"><b class="fst-italic">Адрес:</b> @Model.order.Area обл, @Model.order.Locality, ул. @Model.order.Street, д. @Model.order.House</p>
 }
 <p></p>
-<div class="bank-card-item default-card">
-    <div class="card-info">
-        <div class="d-flex justify-content-between">
-            <h6>@Model.order.IdBankCardNavigation.BankName</h6>
+<div name="bankBard" class="bank-card-item default-card">
+    <div name="cardInfo" class="card-info">
+        <div name="divBankName" class="d-flex justify-content-between">
+            <h6 name="bankName">@Model.order.IdBankCardNavigation.BankName</h6>
         </div>
 
-        <div class="info-row">
-            <div class="info-block"><label>Номер карты</label><div>**** **** **** @Model.order.IdBankCardNavigation.CardNumber[^4..]</div></div>
-            <div class="info-block"><label>Срок действия</label><div>@Model.order.IdBankCardNavigation.ValidityPeriod</div></div>
+        <div name="infoBankName" class="info-row">
+            <div name="txtNumberBank" class="info-block"><label>Номер карты</label><div name="numberBank">**** **** **** @Model.order.IdBankCardNavigation.CardNumber[^4..]</div></div>
+            <div name="txtValidityPeriod" class="info-block"><label>Срок действия</label><div name="validityPeriod" Model.order.IdBankCardNavigation.ValidityPeriod</div>
+        </div>
         </div>
     </div>
 </div>
 <p class="otstup"></p>
 
-<p>Вы уверены, что хотите совершить заказ?</p>
-    <form method="post" asp-page-handler="OrderGo">
-    <button id="btn-making-order">Заказать</button>
+<p name="txtTrue">Вы уверены, что хотите совершить заказ?</p>
+<form name="postOrderGo" method="post" asp-page-handler="OrderGo">
+    <button name="btnOrderGo" id="btn-making-order">Заказать</button>
     </form>
-    <form method="post" asp-page-handler="OrderClose">
-    <button id="btn-close">Отменить</button>
+<form name="postOrderClose" method="post" asp-page-handler="OrderClose">
+    <button name="btnOrderClose" id="btn-close">Отменить</button>
     </form>
-<label class="end-text"></label>
+<label name="end" class="end-text"></label>
 <p class="otstup"></p>

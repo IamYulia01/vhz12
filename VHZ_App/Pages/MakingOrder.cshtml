@@ -8,60 +8,60 @@
 @section Styles {
     <link rel="stylesheet" href="~/css/profile.css" />
 }
-<p class="otstup" />
-<label class="cart-lbl">Оформление заказа</label>
+<p name="otstupParagraph" class="otstup" />
+<label name="makingOrderLabel" class="cart-lbl">Оформление заказа</label>
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
-    <div class="alert alert-danger">
+    <div name="errorMessageDiv" class="alert alert-danger">
         @Model.ErrorMessage
     </div>
 }
-<form method="post" asp-page-handler="PlaceOrder">
-    <p class="otstup" />
-    <label class="txt-cart-14">Способ получения:</label>
+<form name="placeOrderForm" method="post" asp-page-handler="PlaceOrder">
+    <p name="otstupBeforeDelivery" class="otstup" />
+    <label name="deliveryMethodLabel" class="txt-cart-14">Способ получения:</label>
     <br />
-    <input name="delivery" type="radio" value="доставка" class="radio-delivery" />
-    <label class="txt-cart-14">Доставка</label>
+    <input name="deliveryRadio" type="radio" value="доставка" class="radio-delivery" />
+    <label name="deliveryLabel" class="txt-cart-14">Доставка</label>
     <br />
-    <input name="delivery" type="radio" value="самовывоз" class="radio-delivery" />
-    <label class="txt-cart-14">Самовывоз</label>
+    <input name="pickupRadio" type="radio" value="самовывоз" class="radio-delivery" />
+    <label name="pickupLabel" class="txt-cart-14">Самовывоз</label>
     <br />
-    <p class="otstup" />
-    <p></p>
-    <label>Укажите адрес:</label>
+    <p name="otstupAfterDelivery" class="otstup" />
+    <p name="emptyParagraph1"></p>
+    <label name="addressLabel">Укажите адрес:</label>
     <br />
-    <p />
+    <p name="emptyParagraph2" />
     <input type="text" placeholder="Область" class="addres-input" name="Area" />
-    <p />
-    <p />
+    <p name="emptyParagraph3" />
+    <p name="emptyParagraph4" />
 
     <input type="text" placeholder="Населённый пункт" class="addres-input" name="Locality" />
-    <p />
+    <p name="emptyParagraph5" />
     <input type="text" placeholder="Улица" class="addres-input" name="Street" />
-    <p />
+    <p name="emptyParagraph6" />
     <input type="text" placeholder="Дом" class="addres-input" name="House" />
 
-    <p class="otstup"></p>
+    <p name="otstupBeforeCards" class="otstup"></p>
 
 
-    <label>Выберите карту:</label>
-    <div class="card-body">
+    <label name="cardSelectionLabel">Выберите карту:</label>
+    <div name="cardBody" class="card-body">
         @if (Model.BankCards.Any())
         {
-            <div class="bank-cards-list">
+            <div name="bankCardsList" class="bank-cards-list">
                 @foreach (var card in Model.BankCards)
                 {
-                    <div class="bank-card-item default-card">
-                        <div class="card-info">
-                            <input name="bankCard" type="radio" value="@card.IdBankCard" class="radio-bankCard" />
+                    <div name="bankCardItem" class="bank-card-item default-card">
+                        <div name="cardInfo" class="card-info">
+                            <input name="bankCardRadio" type="radio" value="@card.IdBankCard" class="radio-bankCard" />
 
-                            <div class="d-flex justify-content-between">
-                                <h6>@card.BankName</h6>
+                            <div name="cardHeader" class="d-flex justify-content-between">
+                                <h6 name="bankName">@card.BankName</h6>
                             </div>
 
-                            <div class="info-row">
-                                <div class="info-block"><label>Номер карты</label><div>**** **** **** @card.CardNumber[^4..]</div></div>
-                                <div class="info-block"><label>Срок действия</label><div>@card.ValidityPeriod</div></div>
+                            <div name="infoRow" class="info-row">
+                                <div name="cardNumberBlock" class="info-block"><label name="cardNumberLabel">Номер карты</label><div name="maskedCardNumber">**** **** **** @card.CardNumber[^4..]</div></div>
+                                <div name="validityBlock" class="info-block"><label name="validityLabel">Срок действия</label><div name="validityValue">@card.ValidityPeriod</div></div>
                             </div>
                         </div>
                     </div>
@@ -70,17 +70,17 @@
         }
         else
         {
-            <p class="text-muted">У вас пока нет добавленных банковских карт.</p>
-            <button onclick="location.href='/AddBankCard'" class="btn-cart-oform">Добавить карту</button>
+            <p name="noCardsMessage" class="text-muted">У вас пока нет добавленных банковских карт.</p>
+            <button name="addCardButton" onclick="location.href='/AddBankCard'" class="btn-cart-oform">Добавить карту</button>
         }
     </div>
 
-    <p class="otstup"></p>
-    <p></p>
+    <p name="otstupBeforeSubmit" class="otstup"></p>
+    <p name="emptyParagraph7"></p>
 
-    <button class="btn-cart-oform">Заказать</button>
+    <button name="submitOrderButton" class="btn-cart-oform">Заказать</button>
 </form>
-<p />
-<label class="otstup" />
-<p></p>
-<label class="end-text"></label>
+<p name="emptyParagraph8" />
+<label name="emptyLabel" class="otstup" />
+<p name="emptyParagraph9"></p>
+<label name="endLabel" class="end-text"></label>

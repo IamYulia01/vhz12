@@ -9,95 +9,94 @@
     <link rel="stylesheet" href="~/css/catalog.css" />
     <link rel="stylesheet" href="~/css/cart.css" />
 }
-<p class="otstup" />
-<label class="cart-lbl">Корзина</label>
-<p class="otstup" />
-<p class="otstup" />
-<label class="txt-cart">Количество товаров в корзине:</label>
-<label class="cart-amount txt-cart">@Model.amount</label>
-<label class="cart-amount-sht txt-cart">шт</label>
+<label name="cartTitle" class="cart-lbl">Корзина</label>
+<p class="otstup" name="space2"></p>
+<p class="otstup" name="space3"></p>
+<label name="itemsCountLabel" class="txt-cart">Количество товаров в корзине:</label>
+<label name="itemsCountValue" class="cart-amount txt-cart">@Model.amount</label>
+<label name="itemsCountUnit" class="cart-amount-sht txt-cart">шт</label>
 <br />
 @if (@Model.amount == 0)
 {
-    <h1>Корзина пуста</h1>
-    <p></p>
+    <h1 name="emptyCartHeader">Корзина пуста</h1>
+    <p name="emptyCartSpace"></p>
 }
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
-    <div class="alert alert-danger">
+    <div name="errorMessage" class="alert alert-danger">
         @Model.ErrorMessage
     </div>
 }
-<p></p>
-    @foreach (var cart in Model.CartProducts)
-    {
-        string way = "/Image/" + @cart.IdProductNavigation.Image;
-        <div class="product-card-wrapper">
-            <div class="card-catalog">
-                <div class="card-content">
-                    <div class="image-container">
-                        <img src="@way" alt="@cart.IdProductNavigation.NameProduct" class="responsive-image">
+<p name="beforeProductsSpace"></p>
+@foreach (var cart in Model.CartProducts)
+{
+    string way = "/Image/" + @cart.IdProductNavigation.Image;
+    <div name="productWrapper" class="product-card-wrapper">
+        <div name="productCard" class="card-catalog">
+            <div name="cardContent" class="card-content">
+                <div name="imageContainer" class="image-container">
+                    <img name="productImage" src="@way" alt="@cart.IdProductNavigation.NameProduct" class="responsive-image">
+                </div>
+                <div name="textContent" class="text-content">
+                    <div name="priceSection" class="price-section">
+                        <span name="priceLabel" class="price-per">Цена за 10кг</span>
+                        <span name="priceValue" class="price">@cart.IdProductNavigation.Price.ToString("#.##") руб</span>
                     </div>
-                    <div class="text-content">
-                        <div class="price-section">
-                            <span class="price-per">Цена за 10кг</span>
-                            <span class="price">@cart.IdProductNavigation.Price.ToString("#.##") руб</span>
-                        </div>
-                        <div class="product-info">
-                            <h3 class="product-name">@cart.IdProductNavigation.NameProduct</h3>
-                            <p class="product-description">@cart.IdProductNavigation.Appointment</p>
-                            <p class="product-compliance">@cart.IdProductNavigation.ProductCompliance</p>
-                        </div>
+                    <div name="productInfo" class="product-info">
+                        <h3 name="productName" class="product-name">@cart.IdProductNavigation.NameProduct</h3>
+                        <p name="productDescription" class="product-description">@cart.IdProductNavigation.Appointment</p>
+                        <p name="productCompliance" class="product-compliance">@cart.IdProductNavigation.ProductCompliance</p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="cart-controls">
-            <input type="checkbox"
-                   class="check-cart"
-                   name="selectedCarts"
-                   value="@cart.IdCart" />
+    <div name="cartControls" class="cart-controls">
+        <input type="checkbox"
+               name="selectedCartItem"
+               class="check-cart"
+               value="@cart.IdCart" />
 
-        <form method="post" asp-page-handler="DeleteCart" asp-route-idCart="@cart.IdCart" 
-        onsubmit="return confirmDelete(this);" class="delete-form">
-            <button type="submit" class="cart-remove-btn">
-                <i class="fas fa-trash-alt"></i>
+        <form name="deleteForm" method="post" asp-page-handler="DeleteCart" asp-route-idCart="@cart.IdCart"
+              onsubmit="return confirmDelete(this);" class="delete-form">
+            <button name="deleteButton" type="submit" class="cart-remove-btn">
+                <i name="deleteIcon" class="fas fa-trash-alt"></i>
             </button>
         </form>
 
-            <div class="quantity-controls">
-                <form method="post" asp-page-handler="MinusAmount" asp-route-idCart="@cart.IdCart">
-                    <button type="submit" class="quantity-btn">-</button>
-                </form>
-                <span class="quantity-value">@cart.AmountProducts</span>
-                <form method="post" asp-page-handler="PlusAmount" asp-route-idCart="@cart.IdCart">
-                    <button type="submit" class="quantity-btn">+</button>
-                </form>
-            </div>
-
-            <form method="post" asp-page-handler="BuyProduct" asp-route-idCart="@cart.IdCart">
-                <button type="submit" class="buy-now-btn">Купить</button>
+        <div name="quantityControls" class="quantity-controls">
+            <form name="decreaseForm" method="post" asp-page-handler="MinusAmount" asp-route-idCart="@cart.IdCart">
+                <button name="decreaseButton" type="submit" class="quantity-btn">-</button>
             </form>
-            <form method="post" asp-page-handler="SelectProduct">
-                <input type="hidden" name="idProduct" value="@cart.IdProduct" />
-                <button type="submit" class="details-btn">Подробнее</button>
+            <span name="quantityValue" class="quantity-value">@cart.AmountProducts</span>
+            <form name="increaseForm" method="post" asp-page-handler="PlusAmount" asp-route-idCart="@cart.IdCart">
+                <button name="increaseButton" type="submit" class="quantity-btn">+</button>
             </form>
         </div>
-        <div class="otstup"></div>
-    }
 
-    <label class="txt-cart-16">ИТОГО:</label>
-    <label class="cart-amount txt-cart-16">@Model.price.ToString("#.##")</label>
-    <label class="cart-amount-sht txt-cart-16">руб</label>
+        <form name="buyNowForm" method="post" asp-page-handler="BuyProduct" asp-route-idCart="@cart.IdCart">
+            <button name="buyNowButton" type="submit" class="buy-now-btn">Купить</button>
+        </form>
+        <form name="detailsForm" method="post" asp-page-handler="SelectProduct">
+            <input name="productIdInput" type="hidden" name="idProduct" value="@cart.IdProduct" />
+            <button name="detailsButton" type="submit" class="details-btn">Подробнее</button>
+        </form>
+    </div>
+    <div name="itemSpacer" class="otstup"></div>
+}
 
-<button type="submit" id="submitSelected" class="btn-cart-oform">К оформлению</button>
+<label name="totalLabel" class="txt-cart-16">ИТОГО:</label>
+<label name="totalValue" class="cart-amount txt-cart-16">@Model.price.ToString("#.##")</label>
+<label name="totalCurrency" class="cart-amount-sht txt-cart-16">руб</label>
 
-<label class="end-text"></label>
-<p></p>
+<button name="submitOrderButton" type="submit" id="submitSelected" class="btn-cart-oform">К оформлению</button>
 
-<form id="selectedItemsForm" method="post" asp-page-handler="BuySelectedCarts" style="display: none;">
-    <input type="hidden" name="selectedCartsJson" id="selectedCartsInput" />
+<label name="footerLabel" class="end-text"></label>
+<p name="finalSpace"></p>
+
+<form name="selectedItemsForm" id="selectedItemsForm" method="post" asp-page-handler="BuySelectedCarts" style="display: none;">
+    <input name="selectedCartsInput" type="hidden" name="selectedCartsJson" id="selectedCartsInput" />
 </form>
 
 <script>

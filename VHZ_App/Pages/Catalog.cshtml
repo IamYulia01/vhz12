@@ -3,42 +3,45 @@
 
 @model CatalogModel
 @{
-    ViewData["Title"] = "Каталог";
+    ViewData["Title"] = "Каталог товаров";
 }
 
 @section Styles {
     <link rel="stylesheet" href="~/css/catalog.css" />
 }
 
-<p />
-<form method="post" asp-antiforgery="true" asp-page-handler="Search">
-    <div class="container-fluid px-0">
-        <input type="text"
+<p name="topSpace"></p>
+<form name="searchForm" method="post" asp-antiforgery="true" asp-page-handler="Search">
+    <div name="searchContainer" class="container-fluid px-0">
+        <input name="searchInput" 
+               type="text"
                placeholder="Поиск"
                class="found-input"
                asp-for="foundPole" />
-        <button type="submit" class="btn-class">Найти</button>
+        <button name="searchButton" type="submit" class="btn-class">Найти</button>
     </div>
 </form>
-<p></p>
+<p name="afterSearchSpace"></p>
 
-<form method="post" asp-antiforgery="true" asp-page-handler="Filter">
-    <div class="container-fluid px-0">
-        <select asp-for="SelectedType" class="dropDownList">
-            <option value="all">Все</option>
-            <option value="Пластифицированные гранулированные ПВХ-материалы">Пластифицированные гранулированные ПВХ-материалы</option>
-            <option value="Пластифицированные листовые ПВХ-материалы">Пластифицированные листовые ПВХ-материалы</option>
-            <option value="Непластифицированные ПВХ-материалы">Непластифицированные ПВХ-материалы</option>
-            <option value="Изделия из стеклопластика">Изделия из стеклопластика</option>
+<form name="filterForm" method="post" asp-antiforgery="true" asp-page-handler="Filter">
+    <div name="filterContainer" class="container-fluid px-0">
+        <select name="typeFilter" 
+                asp-for="SelectedType" 
+                class="dropDownList">
+            <option name="allOption" value="all">Все</option>
+            <option name="granulatedOption" value="Пластифицированные гранулированные ПВХ-материалы">Пластифицированные гранулированные ПВХ-материалы</option>
+            <option name="sheetOption" value="Пластифицированные листовые ПВХ-материалы">Пластифицированные листовые ПВХ-материалы</option>
+            <option name="nonPlasticOption" value="Непластифицированные ПВХ-материалы">Непластифицированные ПВХ-материалы</option>
+            <option name="fiberglassOption" value="Изделия из стеклопластика">Изделия из стеклопластика</option>
         </select>
-        <button type="submit" class="btn-class">Фильтр</button>
+        <button name="filterButton" type="submit" class="btn-class">Фильтр</button>
     </div>
 </form>
-<p class="otstup" />
+<p name="afterFilterSpace" class="otstup"></p>
 
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
-    <div class="alert alert-danger">
+    <div name="errorMessage" class="alert alert-danger">
         @Model.ErrorMessage
     </div>
 }
@@ -51,47 +54,56 @@
 @{bool isFound = false;}
 @foreach (var group in groupedProducts)
 {
-    <h3 class="product-type-header">@group.Key</h3>
+    <h3 name="productTypeHeader" class="product-type-header">@group.Key</h3>
     foreach (var product in group)
     {
-
         isFound = true;
         string way = "/Image/" + @product.Image;
-        <div class="product-card-wrapper">
-            <div class="card-content">
-                <div class="image-container">
-                    <img src="@way" alt="@product.NameProduct" class="responsive-image">
+        <div name="productCardWrapper" class="product-card-wrapper">
+            <div name="cardContent" class="card-content">
+                <div name="imageContainer" class="image-container">
+                    <img name="productImage" 
+                         src="@way" 
+                         alt="@product.NameProduct" 
+                         class="responsive-image">
                 </div>
-                <div class="text-content">
-                    <div class="price-section">
-                        <span class="price-per">Цена за 10кг</span>
-                        <span class="price">@product.Price.ToString("#.##") руб</span>
+                <div name="textContent" class="text-content">
+                    <div name="priceSection" class="price-section">
+                        <span name="priceLabel" class="price-per">Цена за 10кг</span>
+                        <span name="priceValue" class="price">@product.Price.ToString("#.##") руб</span>
                     </div>
-                    <div class="product-info">
-                        <h3 class="product-name">@product.NameProduct</h3>
-                        <p class="product-description">@product.Appointment</p>
-                        <p class="product-compliance">@product.ProductCompliance</p>
+                    <div name="productInfo" class="product-info">
+                        <h3 name="productName" class="product-name">@product.NameProduct</h3>
+                        <p name="productDescription" class="product-description">@product.Appointment</p>
+                        <p name="productCompliance" class="product-compliance">@product.ProductCompliance</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="product-actions">
-            <form method="post" asp-page-handler="SelectProduct">
-                <input type="hidden" name="idProduct" value="@product.IdProduct" />
-                <button type="submit" class="details-btn">Подробнее</button>
+        <div name="productActions" class="product-actions">
+            <form name="detailsForm" method="post" asp-page-handler="SelectProduct">
+                <input name="productIdInput" 
+                       type="hidden" 
+                       name="idProduct" 
+                       value="@product.IdProduct" />
+                <button name="detailsButton" type="submit" class="details-btn">Подробнее</button>
             </form>
-            <form method="post" asp-page-handler="AddCart" asp-route-idProduct="@product.IdProduct" asp-route-idUser="@Model.idUser">
-                <button type="submit" class="add-basket-btn">Добавить в корзину</button>
+            <form name="addToCartForm" 
+                  method="post" 
+                  asp-page-handler="AddCart" 
+                  asp-route-idProduct="@product.IdProduct" 
+                  asp-route-idUser="@Model.idUser">
+                <button name="addToCartButton" type="submit" class="add-basket-btn">Добавить в корзину</button>
             </form>
         </div>
-        <div class="otstup"></div>
+        <div name="itemSpacer" class="otstup"></div>
     }
 }
 @if (!isFound)
 {
-    <h2>Таких товаров нет</h2>
+    <h2 name="notFoundMessage">Таких товаров нет</h2>
 }
 
-<p></p>
-<label class="end-text"></label>
+<p name="bottomSpace"></p>
+<label name="footerLabel" class="end-text"></label>
