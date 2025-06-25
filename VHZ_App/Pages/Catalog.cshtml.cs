@@ -23,12 +23,7 @@ namespace VHZ_App.Pages
         public string foundPole { get; set; } = "";
         [BindProperty]
         public string SelectedType { get; set; }
-        public void OnGet()
-        {
-            HttpContext.Session.TryGetValue("UserId", out _);
-            CatalogProducts = _context.Products.OrderBy(p => p.Type).ToList();
 
-        }
         public IActionResult OnPostSearch()
         {
             if (string.IsNullOrEmpty(foundPole))
@@ -47,24 +42,40 @@ namespace VHZ_App.Pages
         }
         public IActionResult OnPostFilter()
         {
+            // Сохраняем выбранный тип фильтра в ViewData
+            ViewData["SelectedFilter"] = SelectedType;
+
             CatalogProducts = SelectedType switch
             {
-                "first" => _context.Products
+                "Пластифицированные гранулированные ПВХ-материалы" => _context.Products
                     .Where(p => p.Type == "Пластифицированные гранулированные ПВХ-материалы")
                     .ToList(),
-                "second" => _context.Products
+                "Пластифицированные листовые ПВХ-материалы" => _context.Products
                     .Where(p => p.Type == "Пластифицированные листовые ПВХ-материалы")
                     .ToList(),
-                "thred" => _context.Products
+                "Непластифицированные ПВХ-материалы" => _context.Products
                     .Where(p => p.Type == "Непластифицированные ПВХ-материалы")
                     .ToList(),
-                "four" => _context.Products
+                "Изделия из стеклопластика" => _context.Products
                     .Where(p => p.Type == "Изделия из стеклопластика")
                     .ToList(),
                 _ => _context.Products.ToList()
             };
 
             return Page();
+        }
+
+        public void OnGet()
+        {
+            HttpContext.Session.TryGetValue("UserId", out _);
+
+            // Восстанавливаем выбранный фильтр при загрузке страницы
+            if (ViewData["SelectedFilter"] is string selectedFilter)
+            {
+                SelectedType = selectedFilter;
+            }
+
+            CatalogProducts = _context.Products.OrderBy(p => p.Type).ToList();
         }
         public IActionResult OnPost(int idProduct)
         {

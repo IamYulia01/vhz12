@@ -6,19 +6,19 @@
     ViewData["Title"] = "Карта продукта";
 }
 <p></p>
-<label class="txt-cart-16">@Model.Product.NameProduct</label>
+<label name="nameCardProduct" class="txt-cart-16">@Model.Product.NameProduct</label>
 <p></p>
 <br />
-<label class="gost">@Model.Product.ProductCompliance</label>
+<label name="textProductCompliance" class="gost">@Model.Product.ProductCompliance</label>
 <p></p>
 <br />
-<label class="txt-cart-14"><b class="fst-italic">Тип: </b>@Model.Product.Type</label>
+<label name="textProductType" class="txt-cart-14"><b class="fst-italic">Тип: </b>@Model.Product.Type</label>
 <p></p>
 <br />
-<label class="txt-cart-14"><b class="fst-italic">Описание:</b> @Model.Product.DescriptionProduct</label>
+<label name="textProductDescription" class="txt-cart-14"><b class="fst-italic">Описание:</b> @Model.Product.DescriptionProduct</label>
 <p></p>
 <br />
-<label class="txt-cart-14"><b class="fst-italic">Назначение:</b> @Model.Product.Appointment</label>
+<label name="textProductAppointment" class="txt-cart-14"><b class="fst-italic">Назначение:</b> @Model.Product.Appointment</label>
 <p></p>
 <br />
 <table class="table-custom .table-bordered">

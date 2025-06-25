@@ -44,18 +44,18 @@
 }
 
 @{
-    // Группируем товары по типам
     var groupedProducts = Model.CatalogProducts
         .GroupBy(p => p.Type)
         .OrderBy(g => g.Key);
 }
-
+@{bool isFound = false;}
 @foreach (var group in groupedProducts)
 {
     <h3 class="product-type-header">@group.Key</h3>
-
     foreach (var product in group)
     {
+
+        isFound = true;
         string way = "/Image/" + @product.Image;
         <div class="product-card-wrapper">
             <div class="card-content">
@@ -64,7 +64,7 @@
                 </div>
                 <div class="text-content">
                     <div class="price-section">
-                        <span class="price-per">Цена за 100г</span>
+                        <span class="price-per">Цена за 10кг</span>
                         <span class="price">@product.Price.ToString("#.##") руб</span>
                     </div>
                     <div class="product-info">
@@ -87,6 +87,10 @@
         </div>
         <div class="otstup"></div>
     }
+}
+@if (!isFound)
+{
+    <h2>Таких товаров нет</h2>
 }
 
 <p></p>

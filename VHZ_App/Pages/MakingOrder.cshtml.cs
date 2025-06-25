@@ -22,7 +22,7 @@ namespace VHZ_App.Pages
         }
 
         [BindProperty]
-        public string DeliveryMethod { get; set; } // "доставка" или "самовывоз"
+        public string DeliveryMethod { get; set; } 
 
         [BindProperty]
         public int SelectedBankCardId { get; set; }
@@ -40,7 +40,6 @@ namespace VHZ_App.Pages
                 ? JsonConvert.DeserializeObject<List<int>>(selectedCartsJson)
                 : new List<int>();
 
-            // Загружаем данные о выбранных товарах
             selectedCard = _context.Carts
                 .Include(c => c.IdProductNavigation)
                 .Where(c => selectedCarts.Contains(c.IdCart))
@@ -71,7 +70,7 @@ namespace VHZ_App.Pages
             if (string.IsNullOrEmpty(DeliveryMethod))
             {
                 ErrorMessage = "Выберите способ доставки!";
-                return Page(); // Возвращаем текущую страницу с ошибкой
+                return Page();
             }
 
             if (DeliveryMethod == "доставка" &&
@@ -81,13 +80,13 @@ namespace VHZ_App.Pages
                  string.IsNullOrEmpty(house)))
             {
                 ErrorMessage = "Для доставки укажите полный адрес!";
-                return Page(); // Возвращаем текущую страницу с ошибкой
+                return Page();
             }
 
             if (string.IsNullOrEmpty(bankCardId))
             {
                 ErrorMessage = "Выберите банковскую карту!";
-                return Page(); // Возвращаем текущую страницу с ошибкой
+                return Page();
             }
 
             decimal totalPrice = DeliveryMethod == "доставка" ? price + 2000 : price;
@@ -107,7 +106,6 @@ namespace VHZ_App.Pages
             _context.SaveChanges();
             HttpContext.Session.SetInt32("OrderId", order.IdOrder);
 
-            // Перенаправляем на страницу подтверждения только если все проверки пройдены
             return RedirectToPage("/Confirmation");
         }
     }

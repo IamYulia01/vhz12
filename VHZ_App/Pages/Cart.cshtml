@@ -59,11 +59,12 @@
                    name="selectedCarts"
                    value="@cart.IdCart" />
 
-            <form method="post" asp-page-handler="DeleteCart" asp-route-idCart="@cart.IdCart">
-                <button type="submit" class="cart-remove-btn">
-                    <i class="fas fa-trash-alt"></i>
-                </button>
-            </form>
+        <form method="post" asp-page-handler="DeleteCart" asp-route-idCart="@cart.IdCart" 
+        onsubmit="return confirmDelete(this);" class="delete-form">
+            <button type="submit" class="cart-remove-btn">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </form>
 
             <div class="quantity-controls">
                 <form method="post" asp-page-handler="MinusAmount" asp-route-idCart="@cart.IdCart">
@@ -94,6 +95,7 @@
 
 <label class="end-text"></label>
 <p></p>
+
 <form id="selectedItemsForm" method="post" asp-page-handler="BuySelectedCarts" style="display: none;">
     <input type="hidden" name="selectedCartsJson" id="selectedCartsInput" />
 </form>
@@ -113,4 +115,11 @@
         document.getElementById('selectedCartsInput').value = JSON.stringify(selectedIds);
         document.getElementById('selectedItemsForm').submit();
     });
+    function confirmDelete(form) {
+        if (confirm('Вы уверены, что хотите удалить товар из корзины?')) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 </script>

@@ -49,7 +49,7 @@ namespace VHZ_App.Pages
             if (id != null)
             {
                 order = _context.Orders
-                    .Include(o => o.IdBankCardNavigation)  // Добавляем загрузку связанных данных
+                    .Include(o => o.IdBankCardNavigation)
                     .FirstOrDefault(o => o.IdOrder == id);
 
                 if (order != null)
@@ -62,25 +62,21 @@ namespace VHZ_App.Pages
         }
         public IActionResult OnPostOrderClose()
         {
-            // Загружаем данные, как в OnGet()
             LoadOrderAndCartData();
 
             if (order == null)
             {
-                // Если заказ не найден, просто перенаправляем
                 return RedirectToPage("/Cart");
             }
-
             try
             {
                 _context.Orders.Remove(order);
                 _context.SaveChanges();
-                HttpContext.Session.Remove("OrderId"); // Очищаем сессию
+                HttpContext.Session.Remove("OrderId");
                 return RedirectToPage("/Cart");
             }
             catch (Exception ex)
             {
-                // Можно добавить логгирование ошибки
                 return RedirectToPage("/Error");
             }
         }
@@ -91,25 +87,22 @@ namespace VHZ_App.Pages
 
             try
             {
-                // Удаляем товары из корзины
                 foreach (var card in selectedCard)
                 {
                     _context.Carts.Remove(card);
                 }
                 _context.SaveChanges();
-                HttpContext.Session.Remove("SelectedCarts"); // Очищаем сессию
+                HttpContext.Session.Remove("SelectedCarts");
                 return RedirectToPage("/Cart");
             }
             catch (Exception ex)
             {
-                // Можно добавить логгирование ошибки
                 return RedirectToPage("/Error");
             }
         }
 
         private void LoadOrderAndCartData()
         {
-            // Загружаем выбранные товары
             var selectedCartsJson = HttpContext.Session.GetString("SelectedCarts");
             var selectedCarts = selectedCartsJson != null ?
                 JsonConvert.DeserializeObject<List<int>>(selectedCartsJson) : new List<int>();
@@ -119,7 +112,6 @@ namespace VHZ_App.Pages
                 .Where(c => selectedCarts.Contains(c.IdCart))
                 .ToList();
 
-            // Загружаем заказ
             var id = HttpContext.Session.GetInt32("OrderId");
             if (id != null)
             {

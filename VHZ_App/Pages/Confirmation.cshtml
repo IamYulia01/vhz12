@@ -3,15 +3,15 @@
 
 @model ConfirmationModel
 @{
-    ViewData["Title"] = "Заказ";
+    ViewData["Title"] = "Подтверждение заказа";
 }
 @section Styles {
     <link rel="stylesheet" href="~/css/profile.css" />
 }
-<h2>Подтверждение заказа</h2>
+<label class="cart-lbl">Подтверждение заказа</label>
 <p class="otstup" />
 <div id="order-card">
-    <label id="to-making-txt">К офрмлению:</label>
+    <label id="to-making-txt">К оформлению:</label>
     <br />
     <br />
     @foreach (var cart in Model.selectedCard)

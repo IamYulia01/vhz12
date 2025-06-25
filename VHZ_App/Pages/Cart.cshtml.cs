@@ -52,7 +52,6 @@ namespace VHZ_App.Pages
                 return RedirectToPage("/Account");
             }
 
-            // Десериализуем JSON
             var selectedCarts = JsonConvert.DeserializeObject<List<int>>(selectedCartsJson);
 
             if (selectedCarts == null || selectedCarts.Count == 0)
@@ -68,21 +67,13 @@ namespace VHZ_App.Pages
         public async Task<IActionResult> OnPostBuyProductAsync(int idCart)
         {
             idUser = HttpContext.Session.GetInt32("UserId");
-            // Для покупки одного товара
-            Console.WriteLine($"ввввв"); // Лог в консоль
-
             var selectedCarts = new List<int> { idCart };
             HttpContext.Session.SetString("SelectedCarts", JsonConvert.SerializeObject(selectedCarts));
             return RedirectToPage("/MakingOrder");
         }
-
-
         public async Task<IActionResult> OnPostDeleteCartAsync(int idCart)
         {
             idUser = HttpContext.Session.GetInt32("UserId");
-
-            Console.WriteLine($"User ID: {idUser}, Cart ID: {idCart}"); // Лог в консоль
-
             var cart = await _context.Carts.FindAsync(idCart);
 
             if (cart == null)

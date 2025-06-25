@@ -10,7 +10,6 @@
 }
 <p class="otstup" />
 <label class="cart-lbl">Оформление заказа</label>
-<p class="otstup" />
 @if (!string.IsNullOrEmpty(Model.ErrorMessage))
 {
     <div class="alert alert-danger">
@@ -18,70 +17,70 @@
     </div>
 }
 <form method="post" asp-page-handler="PlaceOrder">
-<p class="otstup" />
-<label class="txt-cart-14">Способ получения:</label>
-<br/>
-<input name="delivery" type="radio" value="доставка" class="radio-delivery" />
-<label class="txt-cart-14">Доставка</label>
-<br />
-<input name="delivery" type="radio" value="самовывоз" class="radio-delivery" />
-<label class="txt-cart-14">Самовывоз</label>
-<br />
-<p class="otstup" />
-<p></p>
-<label>Укажите адрес:</label>
-<br/>
-<p />
-<input type="text" placeholder="Область" class="addres-input" name="Area" />
-<p/>
+    <p class="otstup" />
+    <label class="txt-cart-14">Способ получения:</label>
+    <br />
+    <input name="delivery" type="radio" value="доставка" class="radio-delivery" />
+    <label class="txt-cart-14">Доставка</label>
+    <br />
+    <input name="delivery" type="radio" value="самовывоз" class="radio-delivery" />
+    <label class="txt-cart-14">Самовывоз</label>
+    <br />
+    <p class="otstup" />
+    <p></p>
+    <label>Укажите адрес:</label>
+    <br />
+    <p />
+    <input type="text" placeholder="Область" class="addres-input" name="Area" />
+    <p />
     <p />
 
-<input type="text" placeholder="Населённый пункт" class="addres-input" name="Locality"/>
-<p/>
-<input type="text" placeholder="Улица" class="addres-input" name="Street"/>
-<p/>
-<input type="text" placeholder="Дом" class="addres-input" name="House"/>
+    <input type="text" placeholder="Населённый пункт" class="addres-input" name="Locality" />
+    <p />
+    <input type="text" placeholder="Улица" class="addres-input" name="Street" />
+    <p />
+    <input type="text" placeholder="Дом" class="addres-input" name="House" />
 
-<p class="otstup"></p> 
+    <p class="otstup"></p>
 
 
-<label>Выберите карту:</label>
-<div class="card-body">
-    @if (Model.BankCards.Any())
-    {
-        <div class="bank-cards-list">
-            @foreach (var card in Model.BankCards)
-            {
-                <div class="bank-card-item default-card">
-                    <div class="card-info">
-                        <input name="bankCard" type="radio" value="@card.IdBankCard" class="radio-bankCard" />
+    <label>Выберите карту:</label>
+    <div class="card-body">
+        @if (Model.BankCards.Any())
+        {
+            <div class="bank-cards-list">
+                @foreach (var card in Model.BankCards)
+                {
+                    <div class="bank-card-item default-card">
+                        <div class="card-info">
+                            <input name="bankCard" type="radio" value="@card.IdBankCard" class="radio-bankCard" />
 
-                        <div class="d-flex justify-content-between">
-                            <h6>@card.BankName</h6>
-                        </div>
+                            <div class="d-flex justify-content-between">
+                                <h6>@card.BankName</h6>
+                            </div>
 
-                        <div class="info-row">
-                            <div class="info-block"><label>Номер карты</label><div>**** **** **** @card.CardNumber[^4..]</div></div>
-                            <div class="info-block"><label>Срок действия</label><div>@card.ValidityPeriod</div></div>
+                            <div class="info-row">
+                                <div class="info-block"><label>Номер карты</label><div>**** **** **** @card.CardNumber[^4..]</div></div>
+                                <div class="info-block"><label>Срок действия</label><div>@card.ValidityPeriod</div></div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-        </div>
-    }
-    else
-    {
-        <p class="text-muted">У вас пока нет добавленных банковских карт.</p>
-        <button onclick="location.href='/AddBankCard'" class="btn-cart-oform">Добавить карту</button>
-    }
-</div>
+                }
+            </div>
+        }
+        else
+        {
+            <p class="text-muted">У вас пока нет добавленных банковских карт.</p>
+            <button onclick="location.href='/AddBankCard'" class="btn-cart-oform">Добавить карту</button>
+        }
+    </div>
 
-<p class="otstup"></p>
-<p></p>
+    <p class="otstup"></p>
+    <p></p>
 
-<button class="btn-cart-oform">Заказать</button>
-    </form>
+    <button class="btn-cart-oform">Заказать</button>
+</form>
 <p />
-<label class="otstup"/>
+<label class="otstup" />
 <p></p>
 <label class="end-text"></label>
