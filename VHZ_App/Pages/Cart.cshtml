@@ -11,7 +11,6 @@
 }
 <label name="cartTitle" class="cart-lbl">Корзина</label>
 <p class="otstup" name="space2"></p>
-<p class="otstup" name="space3"></p>
 <label name="itemsCountLabel" class="txt-cart">Количество товаров в корзине:</label>
 <label name="itemsCountValue" class="cart-amount txt-cart">@Model.amount</label>
 <label name="itemsCountUnit" class="cart-amount-sht txt-cart">шт</label>
@@ -54,13 +53,13 @@
 
     <div name="cartControls" class="cart-controls">
         <input type="checkbox"
-               name="selectedCartItem"
                class="check-cart"
+               name="selectedCarts"
                value="@cart.IdCart" />
 
         <form name="deleteForm" method="post" asp-page-handler="DeleteCart" asp-route-idCart="@cart.IdCart"
               onsubmit="return confirmDelete(this);" class="delete-form">
-            <button name="deleteButton" type="submit" class="cart-remove-btn">
+            <button type="submit" class="cart-remove-btn">
                 <i name="deleteIcon" class="fas fa-trash-alt"></i>
             </button>
         </form>
@@ -90,13 +89,12 @@
 <label name="totalValue" class="cart-amount txt-cart-16">@Model.price.ToString("#.##")</label>
 <label name="totalCurrency" class="cart-amount-sht txt-cart-16">руб</label>
 
-<button name="submitOrderButton" type="submit" id="submitSelected" class="btn-cart-oform">К оформлению</button>
-
+<button type="submit" id="submitSelected" class="btn-cart-oform">К оформлению</button>
 <label name="footerLabel" class="end-text"></label>
 <p name="finalSpace"></p>
 
-<form name="selectedItemsForm" id="selectedItemsForm" method="post" asp-page-handler="BuySelectedCarts" style="display: none;">
-    <input name="selectedCartsInput" type="hidden" name="selectedCartsJson" id="selectedCartsInput" />
+<form id="selectedItemsForm" method="post" asp-page-handler="BuySelectedCarts" style="display: none;">
+    <input type="hidden" name="selectedCartsJson" id="selectedCartsInput" />
 </form>
 
 <script>

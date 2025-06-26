@@ -11,30 +11,27 @@
 }
 
 <p name="topSpace"></p>
-<form name="searchForm" method="post" asp-antiforgery="true" asp-page-handler="Search">
-    <div name="searchContainer" class="container-fluid px-0">
-        <input name="searchInput" 
-               type="text"
+<form method="post" asp-antiforgery="true" asp-page-handler="Search">
+    <div class="container-fluid px-0">
+        <input type="text"
                placeholder="Поиск"
                class="found-input"
                asp-for="foundPole" />
-        <button name="searchButton" type="submit" class="btn-class">Найти</button>
+        <button type="submit" class="btn-class">Найти</button>
     </div>
 </form>
-<p name="afterSearchSpace"></p>
+<p></p>
 
-<form name="filterForm" method="post" asp-antiforgery="true" asp-page-handler="Filter">
-    <div name="filterContainer" class="container-fluid px-0">
-        <select name="typeFilter" 
-                asp-for="SelectedType" 
-                class="dropDownList">
-            <option name="allOption" value="all">Все</option>
-            <option name="granulatedOption" value="Пластифицированные гранулированные ПВХ-материалы">Пластифицированные гранулированные ПВХ-материалы</option>
-            <option name="sheetOption" value="Пластифицированные листовые ПВХ-материалы">Пластифицированные листовые ПВХ-материалы</option>
-            <option name="nonPlasticOption" value="Непластифицированные ПВХ-материалы">Непластифицированные ПВХ-материалы</option>
-            <option name="fiberglassOption" value="Изделия из стеклопластика">Изделия из стеклопластика</option>
+<form name="postFilter" method="post" asp-antiforgery="true" asp-page-handler="Filter">
+    <div name="divFilter" class="container-fluid px-0">
+        <select asp-for="SelectedType" class="dropDownList">
+            <option value="all">Все</option>
+            <option value="Пластифицированные гранулированные ПВХ-материалы">Пластифицированные гранулированные ПВХ-материалы</option>
+            <option value="Пластифицированные листовые ПВХ-материалы">Пластифицированные листовые ПВХ-материалы</option>
+            <option value="Непластифицированные ПВХ-материалы">Непластифицированные ПВХ-материалы</option>
+            <option value="Изделия из стеклопластика">Изделия из стеклопластика</option>
         </select>
-        <button name="filterButton" type="submit" class="btn-class">Фильтр</button>
+        <button type="submit" class="btn-class">Фильтр</button>
     </div>
 </form>
 <p name="afterFilterSpace" class="otstup"></p>
@@ -81,20 +78,13 @@
             </div>
         </div>
 
-        <div name="productActions" class="product-actions">
-            <form name="detailsForm" method="post" asp-page-handler="SelectProduct">
-                <input name="productIdInput" 
-                       type="hidden" 
-                       name="idProduct" 
-                       value="@product.IdProduct" />
-                <button name="detailsButton" type="submit" class="details-btn">Подробнее</button>
+        <div class="product-actions">
+            <form method="post" asp-page-handler="SelectProduct">
+                <input type="hidden" name="idProduct" value="@product.IdProduct" />
+                <button type="submit" class="details-btn">Подробнее</button>
             </form>
-            <form name="addToCartForm" 
-                  method="post" 
-                  asp-page-handler="AddCart" 
-                  asp-route-idProduct="@product.IdProduct" 
-                  asp-route-idUser="@Model.idUser">
-                <button name="addToCartButton" type="submit" class="add-basket-btn">Добавить в корзину</button>
+            <form method="post" asp-page-handler="AddCart" asp-route-idProduct="@product.IdProduct" asp-route-idUser="@Model.idUser">
+                <button type="submit" class="add-basket-btn">Добавить в корзину</button>
             </form>
         </div>
         <div name="itemSpacer" class="otstup"></div>

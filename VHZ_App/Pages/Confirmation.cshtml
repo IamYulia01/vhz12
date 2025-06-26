@@ -44,6 +44,7 @@
     <p name="address"><b class="fst-italic">Адрес:</b> @Model.order.Area обл, @Model.order.Locality, ул. @Model.order.Street, д. @Model.order.House</p>
 }
 <p></p>
+
 <div name="bankBard" class="bank-card-item default-card">
     <div name="cardInfo" class="card-info">
         <div name="divBankName" class="d-flex justify-content-between">
@@ -52,8 +53,9 @@
 
         <div name="infoBankName" class="info-row">
             <div name="txtNumberBank" class="info-block"><label>Номер карты</label><div name="numberBank">**** **** **** @Model.order.IdBankCardNavigation.CardNumber[^4..]</div></div>
-            <div name="txtValidityPeriod" class="info-block"><label>Срок действия</label><div name="validityPeriod" Model.order.IdBankCardNavigation.ValidityPeriod</div>
-        </div>
+            <div name="txtValidityPeriod" class="info-block"><label>Срок действия</label>
+                <div name="validityPeriod"> @Model.order.IdBankCardNavigation.ValidityPeriod</div>
+            </div>
         </div>
     </div>
 </div>
